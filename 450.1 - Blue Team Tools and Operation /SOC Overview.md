@@ -1,123 +1,404 @@
- Overview — نظرة عامة على مركز عمليات الأمن
+# نظرة عامة على مركز العمليات الأمنية (SOC Overview)
 
-هدف الوحدة
-فهم البنية الأساسية لـ SOC (Security Operations Center)، من مكوناته الثلاثة، إلى هيكله التنظيمي، إلى وظائفه الجوهرية، ومفهوم قياس الأداء.
+> **المصدر:** SANS SEC450 — Blue Team Fundamentals: Security Operations and Analysis (2022)
+>
+> **الهدف:** مادة تعليمية عربية لمحللي الأمن — مستوى مبتدئ ومتقدم
 
-فهرس المحتويات
+---
 
-مكونات الـ SOC الثلاثة
-مهمة الـ SOC — الأسئلة الأربعة
-توافق الـ SOC مع المؤسسة
-Risk Appetite — مستوى تقبّل المخاطر
-حقيقتان لا يتجاهلهما الـ Blue Team
-الهيكل التنظيمي للـ SOC
-Tiered vs Tierless SOC
-وظائف الـ SOC من البداية للنهاية
-وثائق يجب أن يعرفها كل محلل
-SOC Metrics — قياس الأداء
-الخلاصة
+## Section Objective — هدف هذا القسم
 
+هذا القسم يُجيب على سؤال جوهري واحد:
 
-1. مكونات الـ SOC الثلاثة
-People, Process, Technology — هذا الثلاثي هو أساس أي SOC ناجح.
-(تبسيط الفكرة)
-تخيل مطعمًا: الطباخون هم الـ People، الوصفات هي الـ Process، والمعدات هي الـ Technology. بدون أي واحد منهم، لن يخرج طبق جيد.
+> **"كيف يُبنى فريق SOC بشكل صحيح، وكيف يعمل فعلاً يومياً؟"**
 
-People — الناس
-هم قلب الـ SOC. بدون فريق متفاعل ومدرّب، لا شيء يعمل. اختيار الأشخاص المناسبين يمكن أن يصنع الفرق أو يكسر الفريق بأكمله.
-Process — العمليات
-تحدد ماذا يفعل الناس وكيف يفعلونه. العملية الجيدة تضمن الاتساق والكفاءة.
-Technology — التكنولوجيا
-تُمكّن العمليات وتضاعف قدرة الفريق. لكن التكنولوجيا ليست بديلًا عن الإنسان — هي أداة تجعله أفضل.
+قبل أن تتعلم كيف تحلل الـ **logs** أو تتعامل مع **SIEM**، يجب أن تفهم الإطار الكامل الذي تعمل فيه.
+بدون هذا الفهم، ستكون مجرد شخص يضغط على أزرار — لا محلل أمني حقيقي.
 
-الفكرة هنا: إذا كانت التكنولوجيا قادرة على استبدال المحلل بالكامل، فهذا يعني أن المحلل كان يؤدي مهامًا آلية — وليس تحليلًا حقيقيًا.
+---
 
+## Table of Contents
 
-2. مهمة الـ SOC — الأسئلة الأربعة
-قبل بناء أي SOC، يجب الإجابة على هذه الأسئلة:
-السؤالالهدفما الذي نحمي؟تحديد الأصول الحرجةما هي التهديدات؟فهم طبيعة المهاجمينكيف نكتشفها؟بناء قدرات الكشفكيف نستجيب؟تجهيز خطط الاستجابة
-ببساطة: كلما كانت إجاباتك أكثر تفصيلًا، كانت قدرتك على الدفاع أعلى. السؤال الأول وحده لا يكفي — يجب تحديد أي بيانات، أين تُخزَّن، ومن يصل إليها.
+مكونات العمليات الأمنية  
+مهمة الـ SOC والأسئلة الأربعة  
+ميثاق الـ SOC ولجنة التوجيه  
+مفهوم الـ Risk Appetite  
+حقائق أساسية لفريق الـ Blue Team  
+الهيكل التنظيمي للـ SOC  
+نموذج Tiered vs Tierless  
+خطوات عمل الـ SOC من البداية للنهاية  
+وظائف الـ SOC الأساسية والمساندة  
+المعلومات الحيوية التي يحتاجها كل SOC  
+وثائق يجب على كل محلل معرفتها  
+مقاييس الأداء (SOC Metrics)
 
-3. توافق الـ SOC مع المؤسسة
-SOC Charter
-وثيقة تُعرِّف صلاحيات الـ SOC وحدوده ومهمته العليا. تُحدد:
+---
 
-من يخدم الـ SOC (Constituency)
-ما الخدمات التي يقدمها
-نطاق عمله
+## المكونات الأساسية لأي SOC
 
-هذه الوثيقة تُشرِّع عمل الفريق وتضمن أن الجميع على نفس الصفحة.
+كل **SOC** ناجح يقوم على ثلاثة أركان — تسمى أحياناً "الكرسي ذو الثلاثة أرجل":
 
-Steering Committee
-اجتماعات دورية مع أصحاب المصلحة من الأعمال، تضمن أن الـ SOC يخدم احتياجات المؤسسة الفعلية وليس ما يراه الفريق التقني فقط.
+```
+        ┌──────────────┐
+        │    People    │ ← البشر
+        └──────┬───────┘
+               │
+    ┌──────────┴──────────┐
+    │                     │
+┌───▼────┐           ┌────▼─────┐
+│Process │           │Technology│
+│العملية │           │التقنية   │
+└────────┘           └──────────┘
+```
 
-4. Risk Appetite — مستوى تقبّل المخاطر
-Risk Appetite هو مقدار المخاطرة التي تقبل بها المؤسسة.
-(تبسيط الفكرة)
-مثل قيادة السيارة: بعض الناس يقودون ببطء شديد (risk-averse)، وبعضهم بسرعة عالية (high risk tolerance). مهمتك كـ Blue Team أن تفهم كيف تقود مؤسستك.
+### 1. People — الأشخاص
 
-نوع المؤسسةمستوى تقبّل المخاطرأمثلة على الضبطحكومة / جيشمنخفض جدًاZero Trust، عزل تام، سياسات مشددةشركة ناشئةمرتفعأدوات أساسية، مراقبة بسيطة
-دورك كمحلل: تفهم هذا المستوى وتعمل ضمنه — وإذا رأيت خطرًا غير محسوب، تبلغ الإدارة.
+- هم **قلب** الـ Blue Team وروحها
+- بدون فريق متفاعل ومُدرَّب، لا شيء يعمل
+- اختيار الأشخاص الخطأ يُفشل حتى أفضل التقنيات
 
-Risk Appetite في الواقع
-أحيانًا تجد نفسك أمام جهاز يعمل بـ Windows XP يُشغّل خط إنتاج حيوي ولا يمكن تعديله. الحل ليس رفض استخدامه — بل إيجاد Compensating Controls خارجية كأجهزة فحص الشبكة وجدران الحماية الخارجية.
+### 2. Process — العملية
 
-5. حقيقتان لا يتجاهلهما الـ Blue Team
-الحقيقة الأولى: الاختراق سيحدث
-لا يوجد دفاع مثالي. السؤال ليس "هل سنُخترق؟" بل "متى نكتشف الاختراق وكيف نحدّ من تأثيره؟"
+- تُحدد **ماذا** يفعل الفريق و**كيف** يفعله
+- بدون عملية محددة، يعمل كل شخص بطريقته الخاصة
+- العملية تضمن الاتساق والتكرار والجودة
 
-النتيجة الجيدة: المهاجم يدخل، يُكتشف مبكرًا، لا يصل لهدفه
-النتيجة السيئة: المهاجم يدخل، يبقى أشهرًا، يسرق البيانات، يُعلن الخرق
+### 3. Technology — التقنية
 
-هدف الـ Blue Team: الكشف المبكر + تقليل الأضرار.
+- **مُضاعِف** للقوة، وليس بديلاً عن الإنسان
+- إذا استطاعت التقنية أن تحل محل المحلل كلياً، فهذا يعني أنه كان يقوم بعمل آلي من البداية
+- التقنية تُمكّن من مراقبة كميات ضخمة من البيانات بكفاءة
 
-الحقيقة الثانية: المؤسسة لا تعيش لتكون آمنة فقط
-الأمن هو وظيفة "منع الخسارة" مثل حارس الأمن في المتجر. لا يمكنك تفتيش كل عميل عند الدخول — ستُفلس المتجر. التوازن بين الأمن والإنتاجية ضرورة.
+> **SOC CONTEXT – DERIVED FROM SOURCE:**
+> الخطأ الشائع هو الاعتقاد بأن شراء أداة **SIEM** أو **EDR** باهظة الثمن سيحل كل المشاكل.
+> الأدوات بدون أشخاص مُدرَّبين وعمليات واضحة = أموال ضائعة.
 
-6. الهيكل التنظيمي للـ SOC
-#mermaid-rut{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-rut .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-rut .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-rut .error-icon{fill:#CC785C;}#mermaid-rut .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-rut .edge-thickness-normal{stroke-width:1px;}#mermaid-rut .edge-thickness-thick{stroke-width:3.5px;}#mermaid-rut .edge-pattern-solid{stroke-dasharray:0;}#mermaid-rut .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-rut .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-rut .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-rut .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-rut .marker.cross{stroke:#A1A1A1;}#mermaid-rut svg{font-family:inherit;font-size:16px;}#mermaid-rut p{margin:0;}#mermaid-rut .label{font-family:inherit;color:#E5E5E5;}#mermaid-rut .cluster-label text{fill:#3387a3;}#mermaid-rut .cluster-label span{color:#3387a3;}#mermaid-rut .cluster-label span p{background-color:transparent;}#mermaid-rut .label text,#mermaid-rut span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-rut .node rect,#mermaid-rut .node circle,#mermaid-rut .node ellipse,#mermaid-rut .node polygon,#mermaid-rut .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-rut .rough-node .label text,#mermaid-rut .node .label text,#mermaid-rut .image-shape .label,#mermaid-rut .icon-shape .label{text-anchor:middle;}#mermaid-rut .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-rut .rough-node .label,#mermaid-rut .node .label,#mermaid-rut .image-shape .label,#mermaid-rut .icon-shape .label{text-align:center;}#mermaid-rut .node.clickable{cursor:pointer;}#mermaid-rut .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-rut .arrowheadPath{fill:#0b0b0b;}#mermaid-rut .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-rut .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-rut .edgeLabel{background-color:transparent;text-align:center;}#mermaid-rut .edgeLabel p{background-color:transparent;}#mermaid-rut .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-rut .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-rut .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-rut .cluster text{fill:#3387a3;}#mermaid-rut .cluster span{color:#3387a3;}#mermaid-rut div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-rut .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-rut rect.text{fill:none;stroke-width:0;}#mermaid-rut .icon-shape,#mermaid-rut .image-shape{background-color:transparent;text-align:center;}#mermaid-rut .icon-shape p,#mermaid-rut .image-shape p{background-color:transparent;padding:2px;}#mermaid-rut .icon-shape rect,#mermaid-rut .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-rut .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-rut .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-rut :root{--mermaid-font-family:inherit;}SOC LeadAnalysts Tier1/2/3Detection EngineeringIncident ResponseEngineering & InfraSOC-AdjacentThreat IntelligenceForensicsVuln ManagementRed Team
-لا يوجد هيكل "صحيح" واحد — كل مؤسسة تختار ما يناسب احتياجاتها وحجمها.
+---
 
-7. Tiered vs Tierless SOC
-المعيارTiered SOCTierless SOCالهيكلTier 1 → 2 → 3الجميع يعمل معًاالمرونةمحدودةعاليةالتعلمبطيء (قيود)سريع (حرية)الاتساقعالٍيحتاج انضباطًا ذاتيًاخطر الاستنزافمرتفع (بسبب الملل)أقل
-ببساطة: لا نموذج أفضل بشكل مطلق — كل منهما يُحسِّن جانبًا مختلفًا.
+## مهمة الـ SOC — الأسئلة الأربعة الجوهرية
 
-8. وظائف الـ SOC من البداية للنهاية
-#mermaid-ruu{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-ruu .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-ruu .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-ruu .error-icon{fill:#CC785C;}#mermaid-ruu .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-ruu .edge-thickness-normal{stroke-width:1px;}#mermaid-ruu .edge-thickness-thick{stroke-width:3.5px;}#mermaid-ruu .edge-pattern-solid{stroke-dasharray:0;}#mermaid-ruu .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-ruu .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-ruu .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-ruu .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-ruu .marker.cross{stroke:#A1A1A1;}#mermaid-ruu svg{font-family:inherit;font-size:16px;}#mermaid-ruu p{margin:0;}#mermaid-ruu .label{font-family:inherit;color:#E5E5E5;}#mermaid-ruu .cluster-label text{fill:#3387a3;}#mermaid-ruu .cluster-label span{color:#3387a3;}#mermaid-ruu .cluster-label span p{background-color:transparent;}#mermaid-ruu .label text,#mermaid-ruu span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-ruu .node rect,#mermaid-ruu .node circle,#mermaid-ruu .node ellipse,#mermaid-ruu .node polygon,#mermaid-ruu .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-ruu .rough-node .label text,#mermaid-ruu .node .label text,#mermaid-ruu .image-shape .label,#mermaid-ruu .icon-shape .label{text-anchor:middle;}#mermaid-ruu .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-ruu .rough-node .label,#mermaid-ruu .node .label,#mermaid-ruu .image-shape .label,#mermaid-ruu .icon-shape .label{text-align:center;}#mermaid-ruu .node.clickable{cursor:pointer;}#mermaid-ruu .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-ruu .arrowheadPath{fill:#0b0b0b;}#mermaid-ruu .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-ruu .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-ruu .edgeLabel{background-color:transparent;text-align:center;}#mermaid-ruu .edgeLabel p{background-color:transparent;}#mermaid-ruu .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-ruu .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-ruu .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-ruu .cluster text{fill:#3387a3;}#mermaid-ruu .cluster span{color:#3387a3;}#mermaid-ruu div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-ruu .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-ruu rect.text{fill:none;stroke-width:0;}#mermaid-ruu .icon-shape,#mermaid-ruu .image-shape{background-color:transparent;text-align:center;}#mermaid-ruu .icon-shape p,#mermaid-ruu .image-shape p{background-color:transparent;padding:2px;}#mermaid-ruu .icon-shape rect,#mermaid-ruu .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-ruu .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-ruu .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-ruu :root{--mermaid-font-family:inherit;}CollectionDetectionTriageInvestigationIncident ResponseContinuous Improvement
-الوظيفةالوصفCollectionجمع البيانات الأمنية من الشبكة والأجهزةDetectionتحديد الأنشطة المشبوهة من البياناتTriageترتيب التنبيهات حسب الأولوية والخطورةInvestigationالتحقيق في التنبيه لتأكيده أو رفضهIncident Responseالاحتواء والاستئصال والتعافي
+قبل أي شيء، يجب على كل **SOC** أن يُجيب على هذه الأسئلة بوضوح:
 
-الوظائف المساندة (Auxiliary)
+| السؤال | ما يعنيه فعلاً |
+|--------|----------------|
+| **ماذا نحمي؟** | البيانات؟ الأنظمة؟ الخوادم؟ المستخدمون؟ |
+| **ما هي التهديدات؟** | مجموعات APT؟ Ransomware؟ Insider Threat؟ |
+| **كيف نكشفها؟** | أي أدوات؟ أي logs؟ أي قواعد كشف؟ |
+| **كيف نستجيب؟** | Playbooks؟ فرق IR؟ ترتيب الأولويات؟ |
 
-Threat Intelligence: جمع معلومات عن المهاجمين لتعزيز الكشف
-Forensics: تحليل ما حدث بعد الاختراق بتفصيل عميق
-Self-Assessment: فحص الثغرات، Red Teaming، مراقبة الإعدادات
+**لماذا هذه الأسئلة مهمة للمحلل؟**
 
+- إذا لم تعرف ماذا تحمي، لن تعرف ما هو الحادث "الخطير" فعلاً
+- إذا لم تعرف التهديدات، ستتعامل مع كل تنبيه بنفس الطريقة
+- راجع هذه الأسئلة **بشكل دوري** — التهديدات تتغير، والمنظمة تتغير
 
-9. وثائق يجب أن يعرفها كل محلل
-الوثيقةالصفةالهدفPolicyإلزاميةتحدد "ماذا" يجب فعلهStandardإلزاميةتحدد "كيف" وبأي قدرProcedureإلزاميةخطوات تفصيلية لتنفيذ المهمةGuidelineاختياريةتوصيات وأفضل الممارساتBaselineمرجعيةقائمة إعدادات تفصيلية (مثل CIS Benchmarks)Playbook / Use Caseتشغيليةقواعد كشف + خطوات استجابة خاصة بالـ SOC
+---
 
-10. SOC Metrics — قياس الأداء
-Metrics هي الأرقام التي تُقاس بها فعالية الـ SOC.
-الفكرة هنا: مجرد أن رقمًا يمكن قياسه لا يعني أنه مفيد.
-خصائص الـ Metric الجيد:
+## ميثاق الـ SOC ولجنة التوجيه
 
-مشتق من هدف حقيقي — وليس رقمًا لأجل الرقم
-قابل للتنفيذ — يوجد حد واضح للتدخل عنده
-محدد وقابل للتكرار — شخصان مختلفان يصلان لنفس النتيجة
-يُجمَع تلقائيًا وبشكل متكرر — لا يضيف عبئًا يدويًا
+### SOC Charter — الميثاق
 
+وثيقة رسمية تُحدد:
 
-اسأل نفسك دائمًا: "إذا تحسّن هذا الرقم، هل الأمن فعلًا تحسّن؟"
+- **من نحمي** (Constituency): المستخدمون؟ الشركة كلها؟ فروع معينة؟
+- **ماذا نفعل** (Services): مراقبة، استجابة للحوادث، Threat Hunting؟
+- **حدود العمل** (Scope): أي شبكات؟ أي أنظمة؟
+- **هدفنا الكبير** (Mission): ما الذي يعتبر نجاحاً؟
 
+> الميثاق يُعطي **الصلاحية القانونية** للـ Blue Team لمراقبة الشبكة والتحقيق في الحوادث.
+> بدونه، قد تواجه مشاكل قانونية عند الوصول لبعض الأنظمة.
 
-11. الخلاصة
+### Steering Committee — لجنة التوجيه
 
-Key Takeaways
+- اجتماع دوري مع أصحاب المصلحة الرئيسيين في المنظمة
+- تضمن أن الـ SOC **يخدم أهداف الأعمال** وليس فقط الأهداف التقنية
+- تُبقي قنوات التواصل مفتوحة بين الـ SOC والإدارة
+- تساعد في تحديد **الأولويات** وتخصيص الموارد
 
-الـ SOC يقوم على ثلاثة ركائز: People, Process, Technology — لا يمكن الاستغناء عن أي منها
-مهمة الـ SOC تبدأ بالإجابة على أربعة أسئلة جوهرية: ماذا نحمي، من يهاجمنا، كيف نكشف، كيف نستجيب
-SOC Charter يُشرّع عمل الفريق، وSteering Committee يضمن توافقه مع الأعمال
-Risk Appetite يختلف من مؤسسة لأخرى — مهمة الـ Blue Team العمل ضمنه وليس ضده
-الاختراق سيحدث — الهدف هو الكشف المبكر وتقليل الأضرار
-لا يوجد هيكل تنظيمي "أفضل" للـ SOC — كل نموذج يُحسِّن جانبًا مختلفًا
-الـ Metrics الجيدة مرتبطة بأهداف حقيقية وقابلة للتنفيذ — وليست مجرد أرقام
+---
+
+## مفهوم Risk Appetite — الشهية للمخاطرة
+
+### ما هو؟
+
+مستوى المخاطرة الذي **تقبل** به المنظمة قبل أن تتحرك لمعالجتها.
+
+| نوع المنظمة | مستوى الـ Risk Appetite |
+|-------------|------------------------|
+| الجيش والحكومة | منخفض جداً — أي خرق غير مقبول |
+| المستشفيات والبنوك | منخفض — بيانات حساسة جداً |
+| شركات متوسطة | متوسط — توازن بين الأمان والإنتاجية |
+| Startups صغيرة | مرتفع — السرعة أهم من الأمان أحياناً |
+
+### لماذا يهم المحلل؟
+
+- يُحدد **أي تنبيهات تستحق وقتك** وأيها يمكن تجاهلها
+- يُحدد **مستوى الضوابط** المطبقة (هل يوجد **EDR**؟ هل يوجد **Zero Trust**؟)
+- إذا وجدت ثغرة وأبلغت عنها والإدارة قررت قبول المخاطرة — هذا قرارهم
+
+### مثال عملي من المصدر
+
+> شركة أدوية لديها جهاز يعمل بـ **Windows XP**، ولا يمكن تعديله، ويستخدم **FTP** غير مشفر.
+> لا يمكنك إيقافه لأنه يُنتج دواء بقيمة X دولار في الساعة.
+
+**الحل الصحيح:**
+- لا تقل "يجب إيقاف هذا الجهاز" — ستُطرد
+- طبّق **Compensating Controls** خارجية: جدار حماية خارجي، مراقبة الشبكة، عزل الجهاز
+- وثّق المخاطرة وحصل على موافقة كتابية من الإدارة
+
+---
+
+## حقيقتان أساسيتان لكل محلل
+
+### الحقيقة الأولى: الاختراق سيحدث
+
+لا يوجد دفاع مثالي. المسألة ليست **إذا** سيحدث الاختراق، بل **متى** — وكيف ستتعامل معه.
+
+```
+النتيجة الجيدة:  المهاجم يدخل → نكشفه بسرعة → نُوقفه قبل تحقيق هدفه
+النتيجة السيئة: المهاجم يدخل → لا أحد يلاحظه → يعمل لأشهر → كارثة
+```
+
+**ما يُميز الـ SOC الجيد:** القدرة على الكشف السريع وتقليل الضرر.
+
+### الحقيقة الثانية: شركتك لا تعيش لتكون آمنة فقط
+
+- وظيفة الـ SOC هي **منع الخسائر** — مثل حارس أمن المتجر
+- الأمان الكامل = توقف الأعمال
+- الهدف: **أقصى أمان ممكن بأقل تأثير على الإنتاجية**
+- البلاغ عن المخاطر للإدارة مع **معلومات دقيقة وكاملة** = مسؤوليتك
+
+---
+
+## الهيكل التنظيمي للـ SOC
+
+```mermaid
+flowchart TD
+    A[SOC Lead] --> B[Analysts]
+    B --> B1[Tier 1 - Triage]
+    B --> B2[Tier 2 - Analysis]
+    B --> B3[Tier 3 - Deep Analysis]
+    A --> C[Detection Engineering]
+    A --> D[Incident Response]
+    A --> E[Engineering & Infrastructure]
+    A --> F[SOC-Adjacent Functions]
+    F --> F1[Threat Intelligence]
+    F --> F2[Forensics]
+    F --> F3[Vulnerability Management]
+    F --> F4[Pen Testing / Red Team]
+```
+
+> لا يوجد هيكل "صحيح وحيد" — الأفضل هو ما يجعل الفرق تتواصل وتعمل معاً.
+
+---
+
+## Tiered vs Tierless — نموذجان لتنظيم المحللين
+
+### Tiered SOC — النموذج الطبقي
+
+| Tier | المسؤوليات |
+|------|-----------|
+| **Tier 1** | Triage أولي، فتح التذاكر، التحقق السريع من التنبيهات |
+| **Tier 2** | تحليل عمق أكبر، تحديد نطاق الهجوم، دعم الاستجابة |
+| **Tier 3** | تحليل معقد، Malware Reverse Engineering، Memory Forensics، Threat Hunting |
+
+**المزايا:** مسار واضح للترقية، عملية منظمة  
+**العيوب:** قد يُحبط المحللين الجدد، "باب دوّار" إذا كانت القيود مفرطة
+
+### Tierless SOC — النموذج المسطح
+
+- الجميع يعمل على كل شيء
+- المحللون الجدد يتعلمون بشكل أسرع
+- تعاون أقوى وتحفيز أعلى
+- **لكن:** يتطلب أن يعرف الجميع حدوده وأن يطلب المساعدة عند الحاجة
+
+> **SOC CONTEXT – DERIVED FROM SOURCE:**
+> أكثر من نصف المحللين في الدورات التدريبية يصفون فرقهم كـ "Tierless" بشكل أو بآخر.
+> كلا النموذجين صحيح — الاختيار يعتمد على احتياجات المنظمة.
+
+---
+
+## خطوات عمل الـ SOC يومياً
+
+```mermaid
+flowchart LR
+    A[Collection جمع البيانات] --> B[Detection كشف التهديدات]
+    B --> C[Triage ترتيب الأولويات]
+    C --> D[Investigation التحقيق]
+    D --> E[Incident Response الاستجابة]
+    E --> F[Continuous Improvement تحسين مستمر]
+    F --> A
+```
+
+### شرح كل خطوة
+
+**Collection — الجمع:**
+استقبال البيانات الأمنية من **logs**، شبكة، **endpoints**
+
+**Detection — الكشف:**
+استخدام **SIEM**, **IDS**, **EDR** لرصد الأنشطة المشبوهة وتحويلها لتنبيهات
+
+**Triage — الفرز:**
+اختيار **أهم** التنبيهات للتعامل معها أولاً — حياة المحلل اليومية تبدأ هنا
+
+**Investigation — التحقيق:**
+التحقق هل هذا **False Positive** أم هجوم حقيقي؟ وما نطاقه؟
+
+**Incident Response — الاستجابة:**
+احتواء الهجوم، إزالة المهاجم، استعادة البيئة
+
+**Continuous Improvement — التحسين:**
+بعد كل حادث: ماذا تعلمنا؟ كيف نكتشف هذا بشكل أفضل في المستقبل؟
+
+---
+
+## وظائف الـ SOC: الأساسية والمساندة
+
+### Core SOC Functions — الوظائف الأساسية
+
+| الوظيفة | ما تفعله |
+|---------|---------|
+| **Data Collection** | مراقبة الشبكة والأجهزة وجمع الـ logs |
+| **Detection** | رصد التهديدات عبر **SIEM**, **IDS**, **AV** |
+| **Triage & Investigation** | ترتيب وتحقيق التنبيهات |
+| **Incident Response** | الاستجابة للحوادث المؤكدة |
+
+### Auxiliary Capabilities — القدرات المساندة
+
+| القدرة | دورها |
+|--------|-------|
+| **Threat Intelligence** | معلومات استراتيجية وتكتيكية عن المهاجمين |
+| **Forensics** | التحقيق العميق بعد الاختراق |
+| **Self-Assessment** | اختبار نقاط الضعف، Red Team، Vuln Management |
+
+> الفرق الصغيرة غالباً تجمع كل هذه الوظائف في شخص واحد أو فريق صغير.
+
+---
+
+## المعلومات الحيوية التي يجب أن يمتلكها كل SOC
+
+قائمة المعلومات التي يجب أن تكون متاحة لكل محلل:
+
+- **Network Diagram** — رسم مبسط للشبكة وأين تتدفق البيانات
+- **Points of Visibility** — أين يمكن رؤية حركة المرور (Taps, SPAN Ports, Full PCAP)
+- **Log Flow Diagram** — من أين تأتي الـ logs وإلى أين تذهب
+- **Incident Response Plan** — ماذا نفعل عند وقوع حادث
+- **Communication Plan** — من نُبلغ وكيف ومتى
+- **Critical Assets List** — أي أنظمة تحوي أهم البيانات
+
+> **لماذا مهم للمحلل؟**
+> عندما يُطلق تنبيه، السؤال الأول هو: "هل كنا سنرى هذه الحركة أصلاً؟"
+> بدون معرفة نقاط الرؤية، ستُجيب خطأ وقد تستنتج أن الاختراق لم يحدث لأنه لا توجد logs — بينما المشكلة أنك لا تجمعها أصلاً.
+
+---
+
+## الوثائق التي يجب أن يعرفها المحلل
+
+| نوع الوثيقة | ما هي | إلزامية؟ |
+|-------------|-------|---------|
+| **Policy** | إرشادات عامة ("يجب تركيب Antivirus") | نعم |
+| **Standard** | تفاصيل التطبيق ("إعدادات AV يجب أن تكون...") | نعم |
+| **Procedure** | خطوات تنفيذية محددة | نعم |
+| **Guideline** | اقتراحات وأفضل الممارسات | لا |
+| **Baseline** | قائمة إعدادات دقيقة (مثل CIS Benchmarks) | نعم |
+| **Playbook/Use Case** | منطق الكشف والاستجابة في الـ SIEM | خاص بالـ SOC |
+
+> **الـ Playbook** هو الوثيقة الأكثر عملية للمحلل — يُحدد بالضبط ماذا تفعل عند كل نوع من التنبيهات.
+
+---
+
+## مقاييس الأداء — SOC Metrics
+
+### لماذا تهمك كمحلل؟
+
+**ستُحكَم** على عملك بناءً على مقاييس. إذا كانت المقاييس خاطئة، ستعمل بطريقة خاطئة.
+
+### معايير المقياس الجيد
+
+```
+✅ مرتبط بهدف واضح — يجيب على سؤال محدد
+✅ قابل للتنفيذ — يوجد عتبة تُحرك قراراً
+✅ موحّد ومتكرر — نفس الشخصين يحسبانه = نفس الناتج
+✅ محدَّث تلقائياً — لا يستغرق ساعات لحسابه
+```
+
+### السؤال الذهبي
+
+> **"إذا تحسّن هذا المقياس، هل تحسّن الأمان فعلاً؟"**
+> إذا كانت الإجابة "لا" — المقياس خاطئ.
+
+**أمثلة على مقاييس مفيدة:**
+
+- متوسط وقت الكشف عن الحوادث (Mean Time to Detect)
+- متوسط وقت الاستجابة (Mean Time to Respond)
+- عدد الحوادث الحرجة في الشهر
+- نسبة الـ False Positives لكل قاعدة كشف
+
+---
+
+## 🧠 Key Takeaways — النقاط الأساسية
+
+- **People, Process, Technology** هي الأركان الثلاثة التي يقوم عليها كل SOC ناجح
+- الأسئلة الأربعة (ماذا نحمي؟ ما التهديدات؟ كيف نكشف؟ كيف نستجيب؟) تُحدد مهمة الـ SOC
+- **SOC Charter** يعطي الفريق الصلاحية القانونية والتشغيلية للعمل
+- **Risk Appetite** يُحدد مستوى الضوابط المطلوبة ولا يمكن تجاهله
+- الاختراق **سيحدث** — الفارق هو مدى سرعة كشفك وتقليل الضرر
+- فريق الـ SOC لا يعمل بمعزل — يجب التوافق مع أهداف الأعمال
+- **Tiered** و**Tierless** كلاهما صحيح — الاختيار يعتمد على السياق
+- الـ Metrics يجب أن تعكس الواقع الأمني الحقيقي، وليس أرقاماً تبدو جيدة فقط
+- وجود خطة استجابة ومعلومات الشبكة مسبقاً يُنقذك في وسط الحوادث
+
+---
+
+## 👨‍💻 منظور محلل الـ SOC
+
+**يومياً، المحلل يفكر هكذا:**
+
+1. فتح قائمة التنبيهات → **الأهم أولاً** (الأنظمة الحيوية، الحسابات ذات الصلاحيات العالية)
+2. قبل التحقيق: "هل لدي logs كافية لهذا الحادث؟ أين نقاط الرؤية؟"
+3. عند التحقيق: "هل هذا False Positive أم هجوم حقيقي؟ ما نطاقه؟"
+4. بعد الإغلاق: "ماذا تعلمنا؟ هل يجب تحديث الـ Playbook؟"
+
+**متى تستخدم هذا القسم في التحقيق؟**
+
+- عند السؤال "هل لدينا logs لهذا الحادث؟" → راجع خارطة نقاط الرؤية
+- عند السؤال "من أُبلغ؟" → راجع خطة التواصل
+- عند السؤال "ما مدى خطورة هذا الحادث؟" → راجع قائمة الأصول الحيوية وقارن بالـ Risk Appetite
+
+---
+
+## 🔍 Detection Mindset — عقلية الكشف
+
+### مؤشرات تدل على مشكلة في الـ SOC
+
+- تنبيهات كثيرة لا يُتعامل معها → مشكلة في الـ **Triage** أو كثرة **False Positives**
+- محللون يتركون الفريق باستمرار → مشكلة في **People** أو هيكل العمل
+- حوادث تُكتشف متأخراً → مشكلة في **Detection** أو **Collection**
+- لا يوجد خطة استجابة واضحة → مشكلة في **Process**
+
+### منطق الكشف الصحيح
+
+```
+بيانات جيدة (Input جيد)
+    ↓
+قواعد كشف صحيحة
+    ↓
+تنبيهات عالية الجودة (قليلة False Positives)
+    ↓
+محللون يُركزون على التهديدات الحقيقية
+    ↓
+Garbage In = Garbage Out
+```
+
+---
+
+## ملاحظة ختامية
+
+هذا القسم يُمثل **الأساس النظري** لكل ما سيأتي في رحلتك كمحلل SOC.
+فهم هذه المفاهيم يجعلك تتعامل مع الأدوات والـ logs والتنبيهات بعقلية مختلفة —
+عقلية **محلل يفهم السياق الكامل**، لا مجرد مشغّل أدوات.
+
+---
+
+*المصدر: SANS SEC450 — Blue Team Fundamentals: Security Operations and Analysis © 2022 SANS Institute*
+*هذا المحتوى للأغراض التعليمية فقط*
