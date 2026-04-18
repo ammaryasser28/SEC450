@@ -1,229 +1,498 @@
-SOC Overview — البنية الأساسية لمركز عمليات الأمن
-📚 Table of Contents
+# SANS SEC450 | Blue Team Fundamentals
+## Module 1 — SOC Overview: نظرة عامة على مركز عمليات الأمن
 
-مقدمة
-مكونات الـ SOC الثلاثة
-الأسئلة الأربعة الأساسية
-الـ SOC Charter و Steering Committee
-Risk Appetite
-حقائق مهمة عن الـ Blue Team
-الهيكل التنظيمي للـ SOC
-Tiered vs Tierless SOC
-خطوات عمل الـ SOC
-وظائف الـ SOC الأساسية والمساعدة
-المعلومات الحيوية التي يحتاجها الـ SOC
-أنواع الوثائق
-الـ Metrics
-ملخص شامل
+---
 
+**SANS 450 | Blue Team Operations**
+**Module 1 — SOC Overview**
 
-مقدمة
-الـ SOC (Security Operations Center) هو القلب النابض لأي عملية أمنية في المؤسسة. هو المكان اللي فيه الناس والعمليات والتكنولوجيا بتتحد مع بعض عشان تحمي المؤسسة من الهجمات الإلكترونية.
-في الـ module ده هنتعلم:
+| # | Topic | الموضوع |
+|---|-------|---------|
+| 1 | Components of Security Operations | مكونات عمليات الأمن: People, Process, Technology |
+| 2 | Understanding the SOC Mission | فهم مهمة الـ SOC والأسئلة الأربعة الأساسية |
+| 3 | SOC Charter & Steering Committee | الـ Charter والـ Steering Committee |
+| 4 | Risk Appetite | مفهوم الـ Risk Appetite وكيفية التعامل معه |
+| 5 | Blue Team Truths | الحقائق الأساسية للـ Blue Team |
+| 6 | SOC Organizational Structure | الهيكل التنظيمي للـ SOC: Tiered vs Tierless |
+| 7 | SOC Core Functions | الوظائف الأساسية للـ SOC |
+| 8 | Critical SOC Documents | الوثائق المهمة التي يجب على المحلل معرفتها |
+| 9 | SOC Metrics | قياس وإيصال أداء الـ SOC |
 
-إيه هي المكونات الأساسية للـ SOC
-إزاي نحدد مهمة الفريق
-إيه هو الهيكل التنظيمي المناسب
-إزاي نقيس أداء الـ SOC بشكل صح
+---
 
+## Table of Contents
+- [Introduction](#introduction)
+- [The Three Pillars: People, Process, Technology](#the-three-pillars-people-process-technology)
+- [The Four Core Questions](#the-four-core-questions)
+- [SOC Charter and Steering Committee](#soc-charter-and-steering-committee)
+- [Risk Appetite](#risk-appetite)
+- [Blue Team Truths](#blue-team-truths)
+- [SOC Organizational Structure](#soc-organizational-structure)
+- [Tiered vs Tierless SOCs](#tiered-vs-tierless-socs)
+- [SOC Core Functions](#soc-core-functions)
+- [The SOC at a High Level](#the-soc-at-a-high-level)
+- [Critical SOC Information](#critical-soc-information)
+- [Documents Analysts Must Know](#documents-analysts-must-know)
+- [SOC Metrics](#soc-metrics)
+- [Summary and Exam Checklist](#summary-and-exam-checklist)
 
-مكونات الـ SOC الثلاثة
-الـ SOC بيقوم على ثلاث ركائز أساسية — مشهورة باسم "the three-legged stool" (الكرسي ذو الثلاث أرجل). لو واحدة اتكسرت، الكرسي هيقع.
-#mermaid-r4h7{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4h7 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4h7 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4h7 .error-icon{fill:#CC785C;}#mermaid-r4h7 .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4h7 .edge-thickness-normal{stroke-width:1px;}#mermaid-r4h7 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4h7 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4h7 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4h7 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4h7 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4h7 .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4h7 .marker.cross{stroke:#A1A1A1;}#mermaid-r4h7 svg{font-family:inherit;font-size:16px;}#mermaid-r4h7 p{margin:0;}#mermaid-r4h7 .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4h7 .cluster-label text{fill:#3387a3;}#mermaid-r4h7 .cluster-label span{color:#3387a3;}#mermaid-r4h7 .cluster-label span p{background-color:transparent;}#mermaid-r4h7 .label text,#mermaid-r4h7 span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4h7 .node rect,#mermaid-r4h7 .node circle,#mermaid-r4h7 .node ellipse,#mermaid-r4h7 .node polygon,#mermaid-r4h7 .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4h7 .rough-node .label text,#mermaid-r4h7 .node .label text,#mermaid-r4h7 .image-shape .label,#mermaid-r4h7 .icon-shape .label{text-anchor:middle;}#mermaid-r4h7 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4h7 .rough-node .label,#mermaid-r4h7 .node .label,#mermaid-r4h7 .image-shape .label,#mermaid-r4h7 .icon-shape .label{text-align:center;}#mermaid-r4h7 .node.clickable{cursor:pointer;}#mermaid-r4h7 .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4h7 .arrowheadPath{fill:#0b0b0b;}#mermaid-r4h7 .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4h7 .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4h7 .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4h7 .edgeLabel p{background-color:transparent;}#mermaid-r4h7 .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4h7 .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4h7 .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4h7 .cluster text{fill:#3387a3;}#mermaid-r4h7 .cluster span{color:#3387a3;}#mermaid-r4h7 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4h7 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4h7 rect.text{fill:none;stroke-width:0;}#mermaid-r4h7 .icon-shape,#mermaid-r4h7 .image-shape{background-color:transparent;text-align:center;}#mermaid-r4h7 .icon-shape p,#mermaid-r4h7 .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4h7 .icon-shape rect,#mermaid-r4h7 .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4h7 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4h7 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4h7 :root{--mermaid-font-family:inherit;}👥 People\nالناسSOC⚙️ Process\nالعمليات🖥️ Technology\nالتكنولوجيا✅ Effective Defense
-شرح كل ركيزة
-الركيزةالدوراللو غابتPeopleبيعملوا الـ Analysis والـ Investigation وبيصمموا الـ Processesمفيش SOC يشتغل — هم الروحProcessبيحدد إيه اللي بيتعمل وإزايالشغل بيبقى عشوائي ومش قابل للتكرارTechnologyبتضاعف قدرة الفريق وبتمكنه من مراقبة كميات ضخمة من الـ Dataالفريق محدود في قدرته
+---
 
-[!IMPORTANT]
-الـ Technology مش بديل عن الـ People — هي بس بتخليهم أقوى وأسرع. لو الـ Analyst بتاعك ممكن يتبدل بـ Automation، معناه إنه كان بيعمل شغل آلي من الأساس، مش شغل تحليل حقيقي.
+## Introduction
 
+الـ SOC أو Security Operations Center هو قلب عمليات الأمن السيبراني في أي مؤسسة. في هذا الـ Module، هنتكلم عن الأساسيات اللي لازم كل محلل أمني يعرفها قبل ما يبدأ شغله اليومي.
 
-الأسئلة الأربعة الأساسية
-عشان تحدد مهمة الـ SOC بتاعك، لازم تجاوب على 4 أسئلة محورية:
-#mermaid-r4h8{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4h8 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4h8 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4h8 .error-icon{fill:#CC785C;}#mermaid-r4h8 .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4h8 .edge-thickness-normal{stroke-width:1px;}#mermaid-r4h8 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4h8 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4h8 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4h8 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4h8 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4h8 .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4h8 .marker.cross{stroke:#A1A1A1;}#mermaid-r4h8 svg{font-family:inherit;font-size:16px;}#mermaid-r4h8 p{margin:0;}#mermaid-r4h8 .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4h8 .cluster-label text{fill:#3387a3;}#mermaid-r4h8 .cluster-label span{color:#3387a3;}#mermaid-r4h8 .cluster-label span p{background-color:transparent;}#mermaid-r4h8 .label text,#mermaid-r4h8 span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4h8 .node rect,#mermaid-r4h8 .node circle,#mermaid-r4h8 .node ellipse,#mermaid-r4h8 .node polygon,#mermaid-r4h8 .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4h8 .rough-node .label text,#mermaid-r4h8 .node .label text,#mermaid-r4h8 .image-shape .label,#mermaid-r4h8 .icon-shape .label{text-anchor:middle;}#mermaid-r4h8 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4h8 .rough-node .label,#mermaid-r4h8 .node .label,#mermaid-r4h8 .image-shape .label,#mermaid-r4h8 .icon-shape .label{text-align:center;}#mermaid-r4h8 .node.clickable{cursor:pointer;}#mermaid-r4h8 .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4h8 .arrowheadPath{fill:#0b0b0b;}#mermaid-r4h8 .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4h8 .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4h8 .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4h8 .edgeLabel p{background-color:transparent;}#mermaid-r4h8 .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4h8 .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4h8 .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4h8 .cluster text{fill:#3387a3;}#mermaid-r4h8 .cluster span{color:#3387a3;}#mermaid-r4h8 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4h8 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4h8 rect.text{fill:none;stroke-width:0;}#mermaid-r4h8 .icon-shape,#mermaid-r4h8 .image-shape{background-color:transparent;text-align:center;}#mermaid-r4h8 .icon-shape p,#mermaid-r4h8 .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4h8 .icon-shape rect,#mermaid-r4h8 .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4h8 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4h8 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4h8 :root{--mermaid-font-family:inherit;}❓ 1. What are we trying to protect?\nإيه اللي بنحميه؟❓ 2. What are the threats?\nإيه التهديدات؟❓ 3. How do we detect them?\nإزاي نكتشفها؟❓ 4. How do we respond?\nإزاي نرد عليها؟🎯 SOC Mission Defined
-ليه الأسئلة دي مهمة؟
-تخيل إنك بتقول "هنحمي بيانات الشركة من الـ APTs" — ده مش كافي!
-اللي محتاجه تقوله:
+الـ Blue Team — وهو الاسم الشائع للفريق الدفاعي — مهمته مش بس "بلوك الهاكرز". المهمة الحقيقية هي:
 
-إيه نوع الـ APTs المحددة اللي بتستهدفنا؟
-إزاي هيهاجمونا تحديداً؟
-فين بالظبط البيانات المهمة دي؟
-مين عنده access عليها؟
+> **"Reduce the probability of material impact to my organization due to a cyber event."**
+> — Rick Howard, CSO and Chief Analyst @ CyberWire
 
-كل ما كانت إجاباتك أكثر تفصيلاً، كل ما قدرتك على الدفاع بقت أقوى.
+يعني: **قلّل احتمالية إن أي حدث سيبراني يأثر بشكل حقيقي على المؤسسة.**
 
-[!TIP]
-راجع الأسئلة دي بانتظام — الإجابات بتتغير مع تطور التهديدات والمؤسسة.
+---
 
+## The Three Pillars: People, Process, Technology
 
-الـ SOC Charter و Steering Committee
-الـ SOC Charter
-الـ SOC Charter هو الوثيقة الرسمية اللي بتعطي الـ Blue Team الصلاحية تشتغل، وبتوضح:
-العنصرالوصفConstituency servedمين اللي بيخدمه الـ SOC؟Services deliveredإيه الخدمات المقدمة؟Scope of workإيه نطاق العمل؟Mission statementإيه الهدف الأسمى؟Org structureإيه شكل الفريق؟
+أي SOC يحتاج 3 عناصر أساسية تشتغل مع بعض. تقدر تفكر فيهم زي "الكرسي ذو ثلاث أرجل" — لو واحدة وقعت، الكل وقع.
 
-[!NOTE]
-الـ SOC Charter مش وثيقة بتتكتب مرة وخلاص — هي living document (وثيقة حية) بتتحدث مع تغير التهديدات والمؤسسة.
+### الـ People (الناس)
+الناس هم **قلب وروح** الـ Blue Team. من غير فريق متحمس ومدرب، ما فيش أداة أو عملية بتفيد. اختيار الناس الصح ممكن يفرق بين SOC ناجح وآخر فاشل.
 
-الـ Steering Committee
-الـ Steering Committee هو اجتماع دوري مع أصحاب المصلحة الرئيسيين في المؤسسة. الهدف منه:
-#mermaid-r4h9{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4h9 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4h9 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4h9 .error-icon{fill:#CC785C;}#mermaid-r4h9 .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4h9 .edge-thickness-normal{stroke-width:1px;}#mermaid-r4h9 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4h9 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4h9 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4h9 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4h9 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4h9 .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4h9 .marker.cross{stroke:#A1A1A1;}#mermaid-r4h9 svg{font-family:inherit;font-size:16px;}#mermaid-r4h9 p{margin:0;}#mermaid-r4h9 .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4h9 .cluster-label text{fill:#3387a3;}#mermaid-r4h9 .cluster-label span{color:#3387a3;}#mermaid-r4h9 .cluster-label span p{background-color:transparent;}#mermaid-r4h9 .label text,#mermaid-r4h9 span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4h9 .node rect,#mermaid-r4h9 .node circle,#mermaid-r4h9 .node ellipse,#mermaid-r4h9 .node polygon,#mermaid-r4h9 .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4h9 .rough-node .label text,#mermaid-r4h9 .node .label text,#mermaid-r4h9 .image-shape .label,#mermaid-r4h9 .icon-shape .label{text-anchor:middle;}#mermaid-r4h9 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4h9 .rough-node .label,#mermaid-r4h9 .node .label,#mermaid-r4h9 .image-shape .label,#mermaid-r4h9 .icon-shape .label{text-align:center;}#mermaid-r4h9 .node.clickable{cursor:pointer;}#mermaid-r4h9 .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4h9 .arrowheadPath{fill:#0b0b0b;}#mermaid-r4h9 .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4h9 .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4h9 .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4h9 .edgeLabel p{background-color:transparent;}#mermaid-r4h9 .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4h9 .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4h9 .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4h9 .cluster text{fill:#3387a3;}#mermaid-r4h9 .cluster span{color:#3387a3;}#mermaid-r4h9 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4h9 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4h9 rect.text{fill:none;stroke-width:0;}#mermaid-r4h9 .icon-shape,#mermaid-r4h9 .image-shape{background-color:transparent;text-align:center;}#mermaid-r4h9 .icon-shape p,#mermaid-r4h9 .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4h9 .icon-shape rect,#mermaid-r4h9 .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4h9 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4h9 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4h9 :root{--mermaid-font-family:inherit;}🏛️ Steering Committeeتحديد المخاطر\nمن وجهة نظر العملضبط قدرات الـ SOC\nمع احتياجات المؤسسةضمان التواصل\nالمستمرتوجيه الموارد\nللمخاطر الصح
+- بيعملوا الـ Analysis والـ Investigation
+- بيصمموا الـ Processes وبيشغلوها
+- لو الـ Analysts مش سعداء = Revolving Door = ما فيش استقرار
 
-Risk Appetite
-إيه هو الـ Risk Appetite؟
-الـ Risk Appetite هو مقدار المخاطر اللي المؤسسة مستعدة تقبلها. مش كل مؤسسة بتفكر في الأمن بنفس الطريقة.
-#mermaid-r4ha{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4ha .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4ha .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4ha .error-icon{fill:#CC785C;}#mermaid-r4ha .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4ha .edge-thickness-normal{stroke-width:1px;}#mermaid-r4ha .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4ha .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4ha .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4ha .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4ha .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4ha .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4ha .marker.cross{stroke:#A1A1A1;}#mermaid-r4ha svg{font-family:inherit;font-size:16px;}#mermaid-r4ha p{margin:0;}#mermaid-r4ha .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4ha .cluster-label text{fill:#3387a3;}#mermaid-r4ha .cluster-label span{color:#3387a3;}#mermaid-r4ha .cluster-label span p{background-color:transparent;}#mermaid-r4ha .label text,#mermaid-r4ha span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4ha .node rect,#mermaid-r4ha .node circle,#mermaid-r4ha .node ellipse,#mermaid-r4ha .node polygon,#mermaid-r4ha .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4ha .rough-node .label text,#mermaid-r4ha .node .label text,#mermaid-r4ha .image-shape .label,#mermaid-r4ha .icon-shape .label{text-anchor:middle;}#mermaid-r4ha .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4ha .rough-node .label,#mermaid-r4ha .node .label,#mermaid-r4ha .image-shape .label,#mermaid-r4ha .icon-shape .label{text-align:center;}#mermaid-r4ha .node.clickable{cursor:pointer;}#mermaid-r4ha .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4ha .arrowheadPath{fill:#0b0b0b;}#mermaid-r4ha .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4ha .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4ha .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4ha .edgeLabel p{background-color:transparent;}#mermaid-r4ha .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4ha .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4ha .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4ha .cluster text{fill:#3387a3;}#mermaid-r4ha .cluster span{color:#3387a3;}#mermaid-r4ha div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4ha .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4ha rect.text{fill:none;stroke-width:0;}#mermaid-r4ha .icon-shape,#mermaid-r4ha .image-shape{background-color:transparent;text-align:center;}#mermaid-r4ha .icon-shape p,#mermaid-r4ha .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4ha .icon-shape rect,#mermaid-r4ha .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4ha .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4ha .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4ha :root{--mermaid-font-family:inherit;}زيادة نضجزيادة حساسية🚀 Startup\nLow Security Priority🏢 Mid-size Company\nBalanced Approach🏛️ Government/Military\nHighest Security Priority
-أمثلة حقيقية على تأثير الـ Risk Appetite
-مثال عملي — شركة أدوية مع Windows XP:
-تخيل إنك شغال في شركة أدوية وعندهم جهاز:
+### الـ Process (العملية)
+الـ Process هو **التسلسل المحدد من الخطوات** اللي بتوصلك للنتيجة المطلوبة.
 
-بيشغل Windows XP (مش ممكن يتحدث)
-بيرسل بيانات عبر FTP (بروتوكول غير آمن)
-مسموحلوش تحط عليه أي software أمني
-مسؤول عن إنتاج بيسوى آلاف الدولارات في الساعة
+- بيحدد إيش بالضبط هيعمله الفريق وإزاي
+- بيضمن إن الشغل يتعمل بطريقة قابلة للتكرار والقياس
+- من غير Process واضح، كل محلل بيشتغل بطريقته الخاصة
 
-غلط: "مش هنستخدم الجهاز ده — خطر جداً!" ← هيطردوك فوراً.
-صح: استخدام Compensating Controls خارجية:
+### الـ Technology (التقنية)
+التقنية هي **المُمكِّن** — مش البديل عن الإنسان.
 
-External security appliances بتفحص الـ Network traffic
-Firewalls بتحد التواصل بتاعه
-Web Application Firewalls لحماية الـ web interface
+- بتخلي الشغل اليدوي يتعمل على نطاق واسع (Scale)
+- **Force Multiplier** — بتضاعف قدرات الفريق
+- لو المحلل ممكن تستبدله بأداة، معناه كان بيعمل شغل Automation من الأصل!
 
+```mermaid
+flowchart TD
+    A[People] --> D[Effective SOC Defense]
+    B[Process] --> D
+    C[Technology] --> D
+    D --> E[Identified and Remediated Incidents]
+```
 
-[!WARNING]
-دورك كـ Blue Team Member مش إنك ترفض المخاطر — دورك إنك تدير المخاطر وتقدم حلول واقعية.
+> [!IMPORTANT]
+> التقنية مش بديل عن الناس. لو الأدوات هي اللي بتحل كل المشاكل، إذن ما كانت تحتاج محلل من الأصل. الإنسان هو اللي بيفكر، يحلل، ويقرر.
 
+---
 
-حقائق مهمة عن الـ Blue Team
-الحقيقة الأولى: الاختراق سيحدث
-#mermaid-r4hb{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4hb .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4hb .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4hb .error-icon{fill:#CC785C;}#mermaid-r4hb .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4hb .edge-thickness-normal{stroke-width:1px;}#mermaid-r4hb .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4hb .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4hb .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4hb .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4hb .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4hb .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4hb .marker.cross{stroke:#A1A1A1;}#mermaid-r4hb svg{font-family:inherit;font-size:16px;}#mermaid-r4hb p{margin:0;}#mermaid-r4hb .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4hb .cluster-label text{fill:#3387a3;}#mermaid-r4hb .cluster-label span{color:#3387a3;}#mermaid-r4hb .cluster-label span p{background-color:transparent;}#mermaid-r4hb .label text,#mermaid-r4hb span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4hb .node rect,#mermaid-r4hb .node circle,#mermaid-r4hb .node ellipse,#mermaid-r4hb .node polygon,#mermaid-r4hb .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4hb .rough-node .label text,#mermaid-r4hb .node .label text,#mermaid-r4hb .image-shape .label,#mermaid-r4hb .icon-shape .label{text-anchor:middle;}#mermaid-r4hb .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4hb .rough-node .label,#mermaid-r4hb .node .label,#mermaid-r4hb .image-shape .label,#mermaid-r4hb .icon-shape .label{text-align:center;}#mermaid-r4hb .node.clickable{cursor:pointer;}#mermaid-r4hb .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4hb .arrowheadPath{fill:#0b0b0b;}#mermaid-r4hb .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4hb .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4hb .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4hb .edgeLabel p{background-color:transparent;}#mermaid-r4hb .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hb .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4hb .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4hb .cluster text{fill:#3387a3;}#mermaid-r4hb .cluster span{color:#3387a3;}#mermaid-r4hb div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4hb .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4hb rect.text{fill:none;stroke-width:0;}#mermaid-r4hb .icon-shape,#mermaid-r4hb .image-shape{background-color:transparent;text-align:center;}#mermaid-r4hb .icon-shape p,#mermaid-r4hb .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4hb .icon-shape rect,#mermaid-r4hb .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hb .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4hb .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4hb :root{--mermaid-font-family:inherit;}نعم ✅لا ❌⚔️ Attack Happensهل اتكشفنا بسرعة؟✅ Outcome 1:\nالمهاجم اتكشف مبكراً\nوأتوقف قبل ما يوصل لهدفه❌ Outcome 2:\nالمهاجم بيتجول بحرية\nويعمل ضرر ضخم!
-الهجوم مش هينتهي بـ phishing email واحد أو malware واحد. الهجمات المتطورة multi-stage — بتاخد وقت وبتبني على نفسها. كل ما اكتشفناها بدري، كل ما الضرر كان أقل.
-الحقيقة الثانية: الأمن مش الهدف الوحيد
-المؤسسة بتعمل مشروع عشان تخلق قيمة — الأمن هو وظيفة Loss Prevention (منع الخسائر).
-فكّر في الأمر كده: محل تجاري ممكن يحط حراس أمن، لكن لو طلّبوا من كل زبون إنه يعمل تفتيش أمني كامل — المحل هيفلس!
-التوازن المطلوب:
-#mermaid-r4hc{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4hc .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4hc .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4hc .error-icon{fill:#CC785C;}#mermaid-r4hc .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4hc .edge-thickness-normal{stroke-width:1px;}#mermaid-r4hc .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4hc .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4hc .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4hc .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4hc .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4hc .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4hc .marker.cross{stroke:#A1A1A1;}#mermaid-r4hc svg{font-family:inherit;font-size:16px;}#mermaid-r4hc p{margin:0;}#mermaid-r4hc .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4hc .cluster-label text{fill:#3387a3;}#mermaid-r4hc .cluster-label span{color:#3387a3;}#mermaid-r4hc .cluster-label span p{background-color:transparent;}#mermaid-r4hc .label text,#mermaid-r4hc span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4hc .node rect,#mermaid-r4hc .node circle,#mermaid-r4hc .node ellipse,#mermaid-r4hc .node polygon,#mermaid-r4hc .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4hc .rough-node .label text,#mermaid-r4hc .node .label text,#mermaid-r4hc .image-shape .label,#mermaid-r4hc .icon-shape .label{text-anchor:middle;}#mermaid-r4hc .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4hc .rough-node .label,#mermaid-r4hc .node .label,#mermaid-r4hc .image-shape .label,#mermaid-r4hc .icon-shape .label{text-align:center;}#mermaid-r4hc .node.clickable{cursor:pointer;}#mermaid-r4hc .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4hc .arrowheadPath{fill:#0b0b0b;}#mermaid-r4hc .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4hc .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4hc .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4hc .edgeLabel p{background-color:transparent;}#mermaid-r4hc .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hc .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4hc .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4hc .cluster text{fill:#3387a3;}#mermaid-r4hc .cluster span{color:#3387a3;}#mermaid-r4hc div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4hc .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4hc rect.text{fill:none;stroke-width:0;}#mermaid-r4hc .icon-shape,#mermaid-r4hc .image-shape{background-color:transparent;text-align:center;}#mermaid-r4hc .icon-shape p,#mermaid-r4hc .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4hc .icon-shape rect,#mermaid-r4hc .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hc .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4hc .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4hc :root{--mermaid-font-family:inherit;}التوازن المثالي🔒 Security\n(أعلى أمان)⚡ Business\n(أعلى إنتاجية)
+## The Four Core Questions
 
-الهيكل التنظيمي للـ SOC
-#mermaid-r4hd{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4hd .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4hd .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4hd .error-icon{fill:#CC785C;}#mermaid-r4hd .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4hd .edge-thickness-normal{stroke-width:1px;}#mermaid-r4hd .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4hd .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4hd .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4hd .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4hd .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4hd .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4hd .marker.cross{stroke:#A1A1A1;}#mermaid-r4hd svg{font-family:inherit;font-size:16px;}#mermaid-r4hd p{margin:0;}#mermaid-r4hd .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4hd .cluster-label text{fill:#3387a3;}#mermaid-r4hd .cluster-label span{color:#3387a3;}#mermaid-r4hd .cluster-label span p{background-color:transparent;}#mermaid-r4hd .label text,#mermaid-r4hd span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4hd .node rect,#mermaid-r4hd .node circle,#mermaid-r4hd .node ellipse,#mermaid-r4hd .node polygon,#mermaid-r4hd .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4hd .rough-node .label text,#mermaid-r4hd .node .label text,#mermaid-r4hd .image-shape .label,#mermaid-r4hd .icon-shape .label{text-anchor:middle;}#mermaid-r4hd .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4hd .rough-node .label,#mermaid-r4hd .node .label,#mermaid-r4hd .image-shape .label,#mermaid-r4hd .icon-shape .label{text-align:center;}#mermaid-r4hd .node.clickable{cursor:pointer;}#mermaid-r4hd .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4hd .arrowheadPath{fill:#0b0b0b;}#mermaid-r4hd .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4hd .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4hd .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4hd .edgeLabel p{background-color:transparent;}#mermaid-r4hd .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hd .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4hd .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4hd .cluster text{fill:#3387a3;}#mermaid-r4hd .cluster span{color:#3387a3;}#mermaid-r4hd div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4hd .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4hd rect.text{fill:none;stroke-width:0;}#mermaid-r4hd .icon-shape,#mermaid-r4hd .image-shape{background-color:transparent;text-align:center;}#mermaid-r4hd .icon-shape p,#mermaid-r4hd .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4hd .icon-shape rect,#mermaid-r4hd .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hd .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4hd .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4hd :root{--mermaid-font-family:inherit;}Core Functions👥 AnalystsSOC-Adjacent Functions🧠 Threat Intelligence🔬 Forensics🛡️ Vuln Management🎯 Pen Testing / Red Teams👔 SOC LeadTier 1\nمبتدئين🔍 Detection Engineering🚨 Incident Response⚙️ Engineering & InfrastructureTier 2 & 3 / SMEs\nمتقدمين
+قبل ما تبني SOC أو تقيّمه، لازم تقدر تجاوب على هذي الأسئلة الأربعة:
 
-[!NOTE]
-مفيش "org chart مثالي" واحد — الشكل الصح بيعتمد على احتياجات المؤسسة وطبيعة التهديدات والموارد المتاحة.
+### السؤال 1: What are we trying to protect?
+إيش اللي بنحاول نحميه؟
+- البيانات الحساسة؟ الـ Intellectual Property؟ الـ Critical Infrastructure؟
+- مش بس "بيانات الشركة" — لازم تكون محدد أكثر: أي بيانات، وين موجودة، ومين عنده وصول؟
 
+### السؤال 2: What are the threats?
+إيش التهديدات اللي تواجهنا؟
+- Ransomware؟ APT؟ Insiders؟
+- بتختلف حسب الصناعة والمنطقة الجغرافية
+- الإجابة هنا بتبني الـ Threat Intelligence Program
 
-Tiered vs Tierless SOC
-مقارنة شاملة
-الجانبTiered SOCTierless SOCالهيكلمستويات واضحة (Tier 1, 2, 3)الكل يشارك في كل شيءالعملعمل محدد لكل مستوىتعاون مشتركالحريةأقل حرية في المستويات الأدنىحرية أكبر لجميع المحللينالتطور الوظيفيمسار واضح للترقيألقاب (Senior/Lead) للتمييزالكفاءةأعلى كفاءة في المعالجةأقل كفاءة أحياناًالرضا الوظيفيقد يسبب إحباط للـ Tier 1رضا أعلى عموماًالاحتفاظ بالموظفينمشكلة "Revolving Door"احتفاظ أفضل بالمواهب
-#mermaid-r4he{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4he .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4he .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4he .error-icon{fill:#CC785C;}#mermaid-r4he .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4he .edge-thickness-normal{stroke-width:1px;}#mermaid-r4he .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4he .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4he .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4he .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4he .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4he .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4he .marker.cross{stroke:#A1A1A1;}#mermaid-r4he svg{font-family:inherit;font-size:16px;}#mermaid-r4he p{margin:0;}#mermaid-r4he .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4he .cluster-label text{fill:#3387a3;}#mermaid-r4he .cluster-label span{color:#3387a3;}#mermaid-r4he .cluster-label span p{background-color:transparent;}#mermaid-r4he .label text,#mermaid-r4he span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4he .node rect,#mermaid-r4he .node circle,#mermaid-r4he .node ellipse,#mermaid-r4he .node polygon,#mermaid-r4he .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4he .rough-node .label text,#mermaid-r4he .node .label text,#mermaid-r4he .image-shape .label,#mermaid-r4he .icon-shape .label{text-anchor:middle;}#mermaid-r4he .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4he .rough-node .label,#mermaid-r4he .node .label,#mermaid-r4he .image-shape .label,#mermaid-r4he .icon-shape .label{text-align:center;}#mermaid-r4he .node.clickable{cursor:pointer;}#mermaid-r4he .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4he .arrowheadPath{fill:#0b0b0b;}#mermaid-r4he .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4he .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4he .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4he .edgeLabel p{background-color:transparent;}#mermaid-r4he .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4he .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4he .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4he .cluster text{fill:#3387a3;}#mermaid-r4he .cluster span{color:#3387a3;}#mermaid-r4he div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4he .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4he rect.text{fill:none;stroke-width:0;}#mermaid-r4he .icon-shape,#mermaid-r4he .image-shape{background-color:transparent;text-align:center;}#mermaid-r4he .icon-shape p,#mermaid-r4he .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4he .icon-shape rect,#mermaid-r4he .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4he .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4he .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4he :root{--mermaid-font-family:inherit;}Tiered SOCTier 1:\nInitial Triage\nTicket GenerationTier 2:\nAttack Scoping\nFurther AnalysisTier 3:\nDeep Analysis\nMethodology Development\nThreat HuntingTierless SOCEveryone:\nCollaborates on all tasks\nBased on capability\nNot rank
+### السؤال 3: How do we detect them?
+كيف نكتشف هذي التهديدات؟
+- SIEM Rules؟ IDS Signatures؟ EDR Alerts؟
+- بتحتاج تفهم كيف تسوي Detection لكل نوع تهديد
 
-[!TIP]
-مش في إجابة "صح" أو "غلط" — كل نموذج مناسب لظروف معينة. الـ Tiered مناسب للفرق الكبيرة ذات العمليات المحددة، والـ Tierless مناسب للفرق الصغيرة ذات الثقافة التعاونية.
+### السؤال 4: How will we respond?
+كيف هنرد على الحادثة؟
+- Incident Response Plan
+- Communication Plan
+- Recovery Procedures
 
+> [!NOTE]
+> الأسئلة الأربعة دي مش بس للتأسيس — لازم تراجعها دوريًا لأن التهديدات والفريق والمؤسسة كلها بتتغير مع الوقت.
 
-خطوات عمل الـ SOC
-#mermaid-r4hf{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4hf .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4hf .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4hf .error-icon{fill:#CC785C;}#mermaid-r4hf .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4hf .edge-thickness-normal{stroke-width:1px;}#mermaid-r4hf .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4hf .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4hf .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4hf .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4hf .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4hf .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4hf .marker.cross{stroke:#A1A1A1;}#mermaid-r4hf svg{font-family:inherit;font-size:16px;}#mermaid-r4hf p{margin:0;}#mermaid-r4hf .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4hf .cluster-label text{fill:#3387a3;}#mermaid-r4hf .cluster-label span{color:#3387a3;}#mermaid-r4hf .cluster-label span p{background-color:transparent;}#mermaid-r4hf .label text,#mermaid-r4hf span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4hf .node rect,#mermaid-r4hf .node circle,#mermaid-r4hf .node ellipse,#mermaid-r4hf .node polygon,#mermaid-r4hf .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4hf .rough-node .label text,#mermaid-r4hf .node .label text,#mermaid-r4hf .image-shape .label,#mermaid-r4hf .icon-shape .label{text-anchor:middle;}#mermaid-r4hf .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4hf .rough-node .label,#mermaid-r4hf .node .label,#mermaid-r4hf .image-shape .label,#mermaid-r4hf .icon-shape .label{text-align:center;}#mermaid-r4hf .node.clickable{cursor:pointer;}#mermaid-r4hf .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4hf .arrowheadPath{fill:#0b0b0b;}#mermaid-r4hf .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4hf .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4hf .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4hf .edgeLabel p{background-color:transparent;}#mermaid-r4hf .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hf .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4hf .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4hf .cluster text{fill:#3387a3;}#mermaid-r4hf .cluster span{color:#3387a3;}#mermaid-r4hf div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4hf .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4hf rect.text{fill:none;stroke-width:0;}#mermaid-r4hf .icon-shape,#mermaid-r4hf .image-shape{background-color:transparent;text-align:center;}#mermaid-r4hf .icon-shape p,#mermaid-r4hf .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4hf .icon-shape rect,#mermaid-r4hf .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hf .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4hf .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4hf :root{--mermaid-font-family:inherit;}📥 1. Collection\nجمع البيانات🔎 2. Detection\nالكشف⚖️ 3. Triage\nالتصنيف والأولوية🔬 4. Investigation\nالتحقيق🚨 5. Incident Response\nالاستجابة🔄 Continuous Improvement\nالتحسين المستمر
-شرح كل خطوة
-1. Collection — جمع البيانات:
-الـ SOC بيستقبل feeds أمنية من كل مكان — شبكات، endpoints، cloud، applications.
-2. Detection — الكشف:
-من بين كل الـ data، بنحدد الـ suspicious items. الأدوات، الـ Threat Intelligence، ومعرفة تكتيكات المهاجمين بتحدد كفاءة الخطوة دي.
-3. Triage — التصنيف:
-دايماً عندك أكتر من alert في نفس الوقت. محتاج تحدد إيه الأهم والأخطر تعمله أول.
-4. Investigation — التحقيق:
-بتتعمق في الـ alert المختار تتحقق إنه True Positive أم False Positive، وإيه اللي حصل بالضبط.
-5. Incident Response — الاستجابة:
-بعد التأكد، بتحتوي المشكلة، بتقضي على المهاجم، وبتعيد البيئة للوضع الطبيعي.
-Continuous Improvement — التحسين المستمر:
-بعد كل incident، بتتعلم وبتحسّن العملية كلها.
+---
 
-[!NOTE]
-حياة معظم الـ Analysts اليومية في الخطوات 3 و4 و5. لكن المحلل الممتاز بيفهم كل الخطوات من 1 لـ 5.
+## SOC Charter and Steering Committee
 
+### الـ SOC Charter
+الـ Charter هو **الوثيقة التأسيسية** للـ SOC. فكر فيه زي "دستور الفريق".
 
-وظائف الـ SOC الأساسية والمساعدة
-تصور كامل للـ SOC كنظام
-#mermaid-r4hg{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4hg .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4hg .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4hg .error-icon{fill:#CC785C;}#mermaid-r4hg .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4hg .edge-thickness-normal{stroke-width:1px;}#mermaid-r4hg .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4hg .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4hg .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4hg .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4hg .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4hg .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4hg .marker.cross{stroke:#A1A1A1;}#mermaid-r4hg svg{font-family:inherit;font-size:16px;}#mermaid-r4hg p{margin:0;}#mermaid-r4hg .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4hg .cluster-label text{fill:#3387a3;}#mermaid-r4hg .cluster-label span{color:#3387a3;}#mermaid-r4hg .cluster-label span p{background-color:transparent;}#mermaid-r4hg .label text,#mermaid-r4hg span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4hg .node rect,#mermaid-r4hg .node circle,#mermaid-r4hg .node ellipse,#mermaid-r4hg .node polygon,#mermaid-r4hg .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4hg .rough-node .label text,#mermaid-r4hg .node .label text,#mermaid-r4hg .image-shape .label,#mermaid-r4hg .icon-shape .label{text-anchor:middle;}#mermaid-r4hg .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4hg .rough-node .label,#mermaid-r4hg .node .label,#mermaid-r4hg .image-shape .label,#mermaid-r4hg .icon-shape .label{text-align:center;}#mermaid-r4hg .node.clickable{cursor:pointer;}#mermaid-r4hg .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4hg .arrowheadPath{fill:#0b0b0b;}#mermaid-r4hg .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4hg .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4hg .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4hg .edgeLabel p{background-color:transparent;}#mermaid-r4hg .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hg .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4hg .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4hg .cluster text{fill:#3387a3;}#mermaid-r4hg .cluster span{color:#3387a3;}#mermaid-r4hg div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4hg .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4hg rect.text{fill:none;stroke-width:0;}#mermaid-r4hg .icon-shape,#mermaid-r4hg .image-shape{background-color:transparent;text-align:center;}#mermaid-r4hg .icon-shape p,#mermaid-r4hg .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4hg .icon-shape rect,#mermaid-r4hg .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hg .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4hg .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4hg :root{--mermaid-font-family:inherit;}وظائف مساعدة (Auxiliary)🧠 Threat Intelligence🔬 Forensics📊 Self-Assessment\nRed Team / Vuln Mgmt🏛️ SOC System📥 Data Collection🔍 Detection⚖️ Triage/Investigation🚨 Incident Response📡 Events\nأحداث الشبكة والـ Endpoints🧠 Threat Intelligence\nالـ Signatures والتكتيكات✅ Remediated Issues\nمشاكل محلولة
-الوظائف الأساسية (Core Functions)
-الوظيفةالمهمةData Collectionجمع بيانات الشبكة والـ Endpoints لفهم ما يحدثDetectionمراقبة البيانات وتحديد التهديدات المحتملة عبر IDS وAV والـ SIEMTriage & Investigationتصنيف وتحقيق في الـ Alerts للتأكد من صحتهاIncident Responseاحتواء الهجوم وتقليل الضرر واستعادة البيئة
-الوظائف المساعدة (Auxiliary Functions)
-الوظيفةالمهمةThreat Intelligenceجمع معلومات تفصيلية عن مجموعات الهجومForensicsتحديد ما حدث بالضبط أثناء الاختراقSelf-Assessmentاختبار قدرات الدفاع (Pen Testing, Red Teaming, Vuln Assessment)
+**الـ Charter بيتضمن:**
 
-المعلومات الحيوية التي يحتاجها الـ SOC
-كل محلل لازم يعرف المعلومات دي:
-#mermaid-r4hh{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4hh .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4hh .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4hh .error-icon{fill:#CC785C;}#mermaid-r4hh .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4hh .edge-thickness-normal{stroke-width:1px;}#mermaid-r4hh .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4hh .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4hh .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4hh .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4hh .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4hh .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4hh .marker.cross{stroke:#A1A1A1;}#mermaid-r4hh svg{font-family:inherit;font-size:16px;}#mermaid-r4hh p{margin:0;}#mermaid-r4hh .edge{stroke-width:3;}#mermaid-r4hh .section--1 rect,#mermaid-r4hh .section--1 path,#mermaid-r4hh .section--1 circle,#mermaid-r4hh .section--1 polygon,#mermaid-r4hh .section--1 path{fill:#00000000;}#mermaid-r4hh .section--1 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon--1{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge--1{stroke:#00000000;}#mermaid-r4hh .edge-depth--1{stroke-width:17;}#mermaid-r4hh .section--1 line{stroke:rgba(255, 255, 255, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-0 rect,#mermaid-r4hh .section-0 path,#mermaid-r4hh .section-0 circle,#mermaid-r4hh .section-0 polygon,#mermaid-r4hh .section-0 path{fill:#00000000;}#mermaid-r4hh .section-0 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-0{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-0{stroke:#00000000;}#mermaid-r4hh .edge-depth-0{stroke-width:14;}#mermaid-r4hh .section-0 line{stroke:rgba(255, 255, 255, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-1 rect,#mermaid-r4hh .section-1 path,#mermaid-r4hh .section-1 circle,#mermaid-r4hh .section-1 polygon,#mermaid-r4hh .section-1 path{fill:hsl(15, 52.3364485981%, 33.0392156863%);}#mermaid-r4hh .section-1 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-1{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-1{stroke:hsl(15, 52.3364485981%, 33.0392156863%);}#mermaid-r4hh .edge-depth-1{stroke-width:11;}#mermaid-r4hh .section-1 line{stroke:rgb(126.656542056, 192.7967289719, 214.8434579439);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-2 rect,#mermaid-r4hh .section-2 path,#mermaid-r4hh .section-2 circle,#mermaid-r4hh .section-2 polygon,#mermaid-r4hh .section-2 path{fill:hsla(30, 0%, 0%, 0);}#mermaid-r4hh .section-2 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-2{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-2{stroke:hsla(30, 0%, 0%, 0);}#mermaid-r4hh .edge-depth-2{stroke-width:8;}#mermaid-r4hh .section-2 line{stroke:rgba(255, 255, 255, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-3 rect,#mermaid-r4hh .section-3 path,#mermaid-r4hh .section-3 circle,#mermaid-r4hh .section-3 polygon,#mermaid-r4hh .section-3 path{fill:hsla(60, 0%, 0%, 0);}#mermaid-r4hh .section-3 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-3{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-3{stroke:hsla(60, 0%, 0%, 0);}#mermaid-r4hh .edge-depth-3{stroke-width:5;}#mermaid-r4hh .section-3 line{stroke:rgba(255, 255, 255, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-4 rect,#mermaid-r4hh .section-4 path,#mermaid-r4hh .section-4 circle,#mermaid-r4hh .section-4 polygon,#mermaid-r4hh .section-4 path{fill:hsla(90, 0%, 0%, 0);}#mermaid-r4hh .section-4 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-4{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-4{stroke:hsla(90, 0%, 0%, 0);}#mermaid-r4hh .edge-depth-4{stroke-width:2;}#mermaid-r4hh .section-4 line{stroke:rgba(255, 255, 255, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-5 rect,#mermaid-r4hh .section-5 path,#mermaid-r4hh .section-5 circle,#mermaid-r4hh .section-5 polygon,#mermaid-r4hh .section-5 path{fill:hsla(120, 0%, 0%, 0);}#mermaid-r4hh .section-5 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-5{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-5{stroke:hsla(120, 0%, 0%, 0);}#mermaid-r4hh .edge-depth-5{stroke-width:-1;}#mermaid-r4hh .section-5 line{stroke:rgba(255, 255, 255, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-6 rect,#mermaid-r4hh .section-6 path,#mermaid-r4hh .section-6 circle,#mermaid-r4hh .section-6 polygon,#mermaid-r4hh .section-6 path{fill:hsla(150, 0%, 0%, 0);}#mermaid-r4hh .section-6 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-6{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-6{stroke:hsla(150, 0%, 0%, 0);}#mermaid-r4hh .edge-depth-6{stroke-width:-4;}#mermaid-r4hh .section-6 line{stroke:rgba(255, 255, 255, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-7 rect,#mermaid-r4hh .section-7 path,#mermaid-r4hh .section-7 circle,#mermaid-r4hh .section-7 polygon,#mermaid-r4hh .section-7 path{fill:hsla(210, 0%, 75%, 0);}#mermaid-r4hh .section-7 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-7{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-7{stroke:hsla(210, 0%, 75%, 0);}#mermaid-r4hh .edge-depth-7{stroke-width:-7;}#mermaid-r4hh .section-7 line{stroke:rgba(63.75, 63.75, 63.75, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-8 rect,#mermaid-r4hh .section-8 path,#mermaid-r4hh .section-8 circle,#mermaid-r4hh .section-8 polygon,#mermaid-r4hh .section-8 path{fill:hsla(270, 0%, 0%, 0);}#mermaid-r4hh .section-8 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-8{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-8{stroke:hsla(270, 0%, 0%, 0);}#mermaid-r4hh .edge-depth-8{stroke-width:-10;}#mermaid-r4hh .section-8 line{stroke:rgba(255, 255, 255, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-9 rect,#mermaid-r4hh .section-9 path,#mermaid-r4hh .section-9 circle,#mermaid-r4hh .section-9 polygon,#mermaid-r4hh .section-9 path{fill:hsla(300, 0%, 0%, 0);}#mermaid-r4hh .section-9 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-9{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-9{stroke:hsla(300, 0%, 0%, 0);}#mermaid-r4hh .edge-depth-9{stroke-width:-13;}#mermaid-r4hh .section-9 line{stroke:rgba(255, 255, 255, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-10 rect,#mermaid-r4hh .section-10 path,#mermaid-r4hh .section-10 circle,#mermaid-r4hh .section-10 polygon,#mermaid-r4hh .section-10 path{fill:hsla(330, 0%, 0%, 0);}#mermaid-r4hh .section-10 text{fill:#E5E5E5;}#mermaid-r4hh .node-icon-10{font-size:40px;color:#E5E5E5;}#mermaid-r4hh .section-edge-10{stroke:hsla(330, 0%, 0%, 0);}#mermaid-r4hh .edge-depth-10{stroke-width:-16;}#mermaid-r4hh .section-10 line{stroke:rgba(255, 255, 255, 0);stroke-width:3;}#mermaid-r4hh .disabled,#mermaid-r4hh .disabled circle,#mermaid-r4hh .disabled text{fill:lightgray;}#mermaid-r4hh .disabled text{fill:#efefef;}#mermaid-r4hh .section-root rect,#mermaid-r4hh .section-root path,#mermaid-r4hh .section-root circle,#mermaid-r4hh .section-root polygon{fill:#00000000;}#mermaid-r4hh .section-root text{fill:#E5E5E5;}#mermaid-r4hh .icon-container{height:100%;display:flex;justify-content:center;align-items:center;}#mermaid-r4hh .edge{fill:none;}#mermaid-r4hh .mindmap-node-label{dy:1em;alignment-baseline:middle;text-anchor:middle;dominant-baseline:middle;text-align:center;}#mermaid-r4hh :root{--mermaid-font-family:inherit;}🏛️ Critical\nSOC InfoNetworkLogsPlansAssetsDocumentsNetwork DiagramPoints of VisibilityTaps & SPAN PortsData Flow DiagramLog Flow DiagramWhere logs come fromWhere logs goIncident Response PlanCommunication PlanDisaster Recovery PlanCritical Assets ListPoints of ContactPolicies & StandardsProcedures & Guidelines
+| العنصر | الوصف |
+|--------|--------|
+| Constituency Served | مين هم العملاء الداخليين للـ SOC؟ |
+| Services to be Delivered | إيش الخدمات اللي يقدمها الـ SOC؟ |
+| Scope of Work | حدود عمل الفريق |
+| Mission Statement | رسالة الفريق العليا |
+| Organizational Structure | الهيكل التنظيمي |
 
-[!WARNING]
-لو محلل راح يدور على لوج وملقوش، ومن غير ما يعرف إن اللوج ده أصلاً مش بيتجمع — ممكن يستنتج غلط إن الاختراق ماحصلش! ده خطأ فادح بيعرض المؤسسة للخطر.
+- بيعطي الـ Blue Team **السلطة القانونية** لمراقبة الشبكة والتحقيق في الحوادث
+- لازم يكون معتمد من الـ Management
+- هو **Living Document** — يتحدث مع تطور المؤسسة
 
+### الـ Steering Committee
+الـ Steering Committee هو **اجتماع دوري** مع أصحاب المصلحة الرئيسيين في الـ SOC.
 
-أنواع الوثائق
-فهم الفرق بين أنواع الوثائق مهم جداً لأي محلل SOC:
-#mermaid-r4hi{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4hi .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4hi .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4hi .error-icon{fill:#CC785C;}#mermaid-r4hi .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4hi .edge-thickness-normal{stroke-width:1px;}#mermaid-r4hi .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4hi .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4hi .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4hi .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4hi .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4hi .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4hi .marker.cross{stroke:#A1A1A1;}#mermaid-r4hi svg{font-family:inherit;font-size:16px;}#mermaid-r4hi p{margin:0;}#mermaid-r4hi .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4hi .cluster-label text{fill:#3387a3;}#mermaid-r4hi .cluster-label span{color:#3387a3;}#mermaid-r4hi .cluster-label span p{background-color:transparent;}#mermaid-r4hi .label text,#mermaid-r4hi span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4hi .node rect,#mermaid-r4hi .node circle,#mermaid-r4hi .node ellipse,#mermaid-r4hi .node polygon,#mermaid-r4hi .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4hi .rough-node .label text,#mermaid-r4hi .node .label text,#mermaid-r4hi .image-shape .label,#mermaid-r4hi .icon-shape .label{text-anchor:middle;}#mermaid-r4hi .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4hi .rough-node .label,#mermaid-r4hi .node .label,#mermaid-r4hi .image-shape .label,#mermaid-r4hi .icon-shape .label{text-align:center;}#mermaid-r4hi .node.clickable{cursor:pointer;}#mermaid-r4hi .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4hi .arrowheadPath{fill:#0b0b0b;}#mermaid-r4hi .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4hi .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4hi .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4hi .edgeLabel p{background-color:transparent;}#mermaid-r4hi .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hi .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4hi .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4hi .cluster text{fill:#3387a3;}#mermaid-r4hi .cluster span{color:#3387a3;}#mermaid-r4hi div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4hi .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4hi rect.text{fill:none;stroke-width:0;}#mermaid-r4hi .icon-shape,#mermaid-r4hi .image-shape{background-color:transparent;text-align:center;}#mermaid-r4hi .icon-shape p,#mermaid-r4hi .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4hi .icon-shape rect,#mermaid-r4hi .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hi .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4hi .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4hi :root{--mermaid-font-family:inherit;}📜 Policies\nسياسات عامة\nإجبارية - تجيب على 'إيه'📋 Standards\nمعايير محددة\nإجبارية - تجيب على 'إزاي وقد إيه'📝 Procedures\nإجراءات خطوة بخطوة\nتفصيلية جداً💡 Guidelines\nإرشادات مقترحة\nاختيارية📊 Baselines\nقوائم تفصيلية للإعدادات\nمثل CIS Benchmarks🎯 Playbooks / Use Cases\nخاصة بالـ SOC\nقواعد الـ SIEM وإجراءات الاستجابة
-جدول مقارنة شامل
-النوعالإجباريةالتفصيلالمثالPolicy✅ إجباريمنخفض"كل الأجهزة لازم يكون عليها Antivirus"Standard✅ إجباريمتوسط"إعدادات الـ Antivirus يجب أن تكون..."Procedure✅ إجباريعالي جداً"خطوات تثبيت وتفعيل الـ Antivirus"Guideline❌ اختياريمتوسط"أفضل الممارسات في نشر الـ Antivirus"Baseline✅ مرجعيعالي جداًقوائم CIS BenchmarksPlaybook✅ خاص بالـ SOCمتوسط"إجراءات التعامل مع Brute Force Login"
+**دوره:**
+- يضمن إن الـ SOC متوافق مع أهداف المؤسسة
+- يطرح مخاوف الـ Risk من جانب الأعمال
+- يربط أداء الـ SOC باحتياجات الشركة
 
-الـ Metrics
-ما هو الـ Metric الجيد؟
-مش كل رقم بتقدر تتتبعه هو Metric مفيد. الـ Metric الجيد لازم يكون:
-#mermaid-r4hj{font-family:inherit;font-size:16px;fill:#E5E5E5;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r4hj .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r4hj .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r4hj .error-icon{fill:#CC785C;}#mermaid-r4hj .error-text{fill:#3387a3;stroke:#3387a3;}#mermaid-r4hj .edge-thickness-normal{stroke-width:1px;}#mermaid-r4hj .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r4hj .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r4hj .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r4hj .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r4hj .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r4hj .marker{fill:#A1A1A1;stroke:#A1A1A1;}#mermaid-r4hj .marker.cross{stroke:#A1A1A1;}#mermaid-r4hj svg{font-family:inherit;font-size:16px;}#mermaid-r4hj p{margin:0;}#mermaid-r4hj .label{font-family:inherit;color:#E5E5E5;}#mermaid-r4hj .cluster-label text{fill:#3387a3;}#mermaid-r4hj .cluster-label span{color:#3387a3;}#mermaid-r4hj .cluster-label span p{background-color:transparent;}#mermaid-r4hj .label text,#mermaid-r4hj span{fill:#E5E5E5;color:#E5E5E5;}#mermaid-r4hj .node rect,#mermaid-r4hj .node circle,#mermaid-r4hj .node ellipse,#mermaid-r4hj .node polygon,#mermaid-r4hj .node path{fill:transparent;stroke:#A1A1A1;stroke-width:1px;}#mermaid-r4hj .rough-node .label text,#mermaid-r4hj .node .label text,#mermaid-r4hj .image-shape .label,#mermaid-r4hj .icon-shape .label{text-anchor:middle;}#mermaid-r4hj .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r4hj .rough-node .label,#mermaid-r4hj .node .label,#mermaid-r4hj .image-shape .label,#mermaid-r4hj .icon-shape .label{text-align:center;}#mermaid-r4hj .node.clickable{cursor:pointer;}#mermaid-r4hj .root .anchor path{fill:#A1A1A1!important;stroke-width:0;stroke:#A1A1A1;}#mermaid-r4hj .arrowheadPath{fill:#0b0b0b;}#mermaid-r4hj .edgePath .path{stroke:#A1A1A1;stroke-width:2.0px;}#mermaid-r4hj .flowchart-link{stroke:#A1A1A1;fill:none;}#mermaid-r4hj .edgeLabel{background-color:transparent;text-align:center;}#mermaid-r4hj .edgeLabel p{background-color:transparent;}#mermaid-r4hj .edgeLabel rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hj .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#mermaid-r4hj .cluster rect{fill:#CC785C;stroke:hsl(15, 12.3364485981%, 48.0392156863%);stroke-width:1px;}#mermaid-r4hj .cluster text{fill:#3387a3;}#mermaid-r4hj .cluster span{color:#3387a3;}#mermaid-r4hj div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:#CC785C;border:1px solid hsl(15, 12.3364485981%, 48.0392156863%);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r4hj .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#E5E5E5;}#mermaid-r4hj rect.text{fill:none;stroke-width:0;}#mermaid-r4hj .icon-shape,#mermaid-r4hj .image-shape{background-color:transparent;text-align:center;}#mermaid-r4hj .icon-shape p,#mermaid-r4hj .image-shape p{background-color:transparent;padding:2px;}#mermaid-r4hj .icon-shape rect,#mermaid-r4hj .image-shape rect{opacity:0.5;background-color:transparent;fill:transparent;}#mermaid-r4hj .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r4hj .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r4hj :root{--mermaid-font-family:inherit;}📊 Metric جيد⬆️ Top-Down\nمشتق من هدف محدد⚡ Actionable\nله threshold وإجراء📐 Well-Defined\nلو اتنين حسبوه هيطلع نفس الرقم🔄 Automated\nمش بياخد ساعات يتحسب
-السؤال الأهم في الـ Metrics
+```mermaid
+flowchart LR
+    A[Business Stakeholders] --> B[Steering Committee]
+    B --> C[SOC Charter Update]
+    C --> D[SOC Operations]
+    D --> E[Metrics and Reports]
+    E --> B
+```
 
-"لو الـ Metric ده اتحسّن — هل الأمن اتحسّن فعلاً؟"
+---
 
-لو الإجابة "مش بالضرورة" — معناه إن الـ Metric ده بيقيس الغلط.
-مثال: لو قسنا "عدد الـ Alerts المغلقة في اليوم" — ممكن المحللين يبدأوا يغلقوا الـ Alerts بدون تحقيق صحيح عشان يحسّنوا الرقم. النتيجة؟ رقم كويس وأمن أسوأ!
+## Risk Appetite
 
-[!WARNING]
-الـ Metric الغلط بيقود لسلوك غلط. لو حاسس إن الـ Metric اللي بتتقاس بيه بيخليك تعمل حاجة مش بتحسن الأمن فعلاً — اتكلم مع مديرك وغيّره.
+### مفهوم الـ Risk Appetite
+الـ Risk Appetite هو **مقدار المخاطرة اللي المؤسسة مستعدة تتقبله**.
 
+مثال من الحياة الواقعية:
+- **حكومة أو عسكري:** Risk Appetite منخفض جدًا → ضوابط أمنية صارمة جدًا
+- **Startup صغيرة:** Risk Appetite أعلى → تركيز على السرعة وليس الأمان
+- **بنك:** وسط → توازن بين الأمان وراحة العميل
 
-ملخص شامل
-النقاط الأساسية للمذاكرة
-🔵 مكونات الـ SOC:
+### المقياس
 
-الـ People هم الركيزة الأساسية — بدونهم لا شيء يعمل
-الـ Process بيحدد طريقة العمل
-الـ Technology بتضاعف القدرة، مش بتحل محل الإنسان
+```
+No Security ←————————————————→ Tight Security
+             Reasonable Security
+```
 
-🟢 التخطيط الاستراتيجي:
+### حقيقة مهمة
+> الشركات مش موجودة **عشان تكون آمنة** — موجودة عشان تحقق قيمة اقتصادية.
+> الأمن هو **وظيفة منع الخسائر** (Loss Prevention Function).
 
-أجب على الأسئلة الأربعة لتحديد المهمة
-الـ SOC Charter هو وثيقة الصلاحية والتوجيه
-الـ Steering Committee يضمن التوافق مع أهداف المؤسسة
-الـ Risk Appetite بيختلف من مؤسسة لأخرى — اعمل بداخله
+فكر فيها زي حارس الأمن في متجر:
+- ممكن تعمل تفتيش TSA على كل زبون → 0% سرقة لكن 100% عملاء يهربون
+- لازم توازن بين الأمان واستمرار العمل
 
-🔴 حقائق الـ Blue Team:
+### مثال واقعي: Risk Appetite meets Reality
+تخيل إنك بتشتغل في شركة أدوية، وعندهم ماكينة إنتاج بتشغّل Windows XP ولا يقدروا يغيروها:
+- ما ينفع تثبت Antivirus عليها
+- ما تقدر تحدث الـ OS
+- محتاجة تبعت بيانات عبر FTP
 
-الاختراق سيحدث — هدفك تحديد وتقليل الضرر
-المؤسسة مش موجودة بس عشان تكون آمنة — وازن بين الأمن والإنتاجية
+**الحل الخاطئ:** "ما نستخدمها" → ستُطرد فورًا!
 
-🟡 الهيكل التنظيمي:
+**الحل الصح:** Compensating Controls خارجية:
+- Firewall خارجي يتحكم في الـ Traffic
+- Web Application Firewall
+- Network-level Antivirus Scanning
+- Strict Allow-list للـ Communication
 
-مفيش شكل واحد صح — كل مؤسسة تختار ما يناسبها
-الـ Tiered أكثر هيكلية، الـ Tierless أكثر مرونة
+> [!WARNING]
+> لما المؤسسة تقبل Risk معين بعد ما شرحت له المخاطر، وثّق ذلك كتابيًا. مهمتك إنك تعطيهم معلومات دقيقة، مش إنك تتخذ القرار عنهم.
 
-🟣 عمل الـ SOC:
+---
 
-Collection → Detection → Triage → Investigation → IR → Continuous Improvement
-المحلل الممتاز يفهم كل الخطوات مش بس خطوات عمله
+## Blue Team Truths
 
-⚫ الوثائق:
+### الحقيقة الأولى: Compromise Will Happen
+**الاختراق سيحدث — مش السؤال هل بل متى.**
 
-Policy (إيه) → Standard (إزاي) → Procedure (خطوات) → Guideline (اقتراحات) → Baseline (تفاصيل تقنية)
+السؤال الحقيقي: **كيف هيأثر عليك؟**
 
-🔶 الـ Metrics:
+| النتيجة | الوصف |
+|--------|--------|
+| Outcome 1 (Ideal) | المهاجم ينجح في الخطوات الأولى، لكن يُكتشف سريعًا ويفشل في تحقيق هدفه |
+| Outcome 2 (Disaster) | المهاجم ما يتكشف، يتحرك بحرية، ويحقق أهدافه الكاملة |
 
-لازم تكون Top-down، Actionable، Well-defined، وAutomated
-اسأل دايماً: "هل تحسّن الرقم ده يعني إن الأمن تحسّن فعلاً؟"
+```mermaid
+flowchart TD
+    A[Attack Begins] --> B{Detected Early?}
+    B -->|Yes| C[Limited Damage]
+    B -->|No| D[Full Breach]
+    C --> E[Quick Recovery]
+    D --> F[Expensive Recovery and PR Damage]
+```
 
+**الهدف:** اكتشف بكير وقلل الضرر.
 
-Checklist للمذاكرة ✅
+### الحقيقة الثانية: Your Company Doesn't Exist to Be Secure
+**شركتك مش موجودة عشان تكون آمنة فقط.**
 
- فاهم الفرق بين الـ People والـ Process والـ Technology في الـ SOC
- تعرف تجاوب على الأسئلة الأربعة الأساسية لتحديد المهمة
- فاهم إيه هو الـ SOC Charter وليه مهم
- عارف دور الـ Steering Committee
- فاهم مفهوم الـ Risk Appetite وإزاي يأثر على الـ SOC
- تعرف تفرق بين Tiered وTierless SOC وعيوب ومزايا كل منهم
- عارف خطوات عمل الـ SOC من Collection لـ Continuous Improvement
- فاهم الفرق بين Core Functions والـ Auxiliary Functions
- تعرف تفرق بين Policy وStandard وProcedure وGuideline وBaseline
- عارف خصائص الـ Metric الجيد وتعرف تكتشف الـ Metric الغلط
+الـ Blue Team بيقدم **Loss Prevention Function** — زي حراس الأمن في المتجر.
+
+- لازم يكون في توازن بين الأمان والإنتاجية
+- القرار بمستوى الأمان يتحكم فيه الـ Management
+- دورك تعطيهم معلومات دقيقة ليتخذوا قرار مبني على بيانات صحيحة
+
+> [!TIP]
+> لما تختلف مع قرار أمني، حاول تشرح السبب بأرقام وتأثير على الأعمال. الأرقام بتقنع الإدارة أكثر من الحجج التقنية المجردة.
+
+---
+
+## SOC Organizational Structure
+
+### الهيكل التنظيمي النموذجي
+
+```mermaid
+flowchart TD
+    A[SOC Lead] --> B[Analysts]
+    A --> C[Detection Engineering]
+    A --> D[Incident Response]
+    A --> E[Engineering and Infrastructure]
+    B --> B1[Tier 1]
+    B --> B2[Tier 2 and 3 / SMEs]
+    D --> D1[Incident Lead]
+    F[SOC-Adjacent Functions] --> G[Threat Intelligence]
+    F --> H[Forensics]
+    F --> I[Vulnerability Management]
+    F --> J[Pen Testing / Red Teams]
+```
+
+> [!NOTE]
+> ما في هيكل تنظيمي "صح" وحيد للـ SOC. يختلف حسب حجم المؤسسة ومتطلباتها. المهم إن الفرق كلها تتواصل بفعالية.
+
+---
+
+## Tiered vs Tierless SOCs
+
+### الـ Tiered SOC (المتدرج)
+
+| Tier | المستوى | المهام الرئيسية |
+|------|--------|----------------|
+| Tier 1 | مبتدئ | Initial Triage, Ticket Generation |
+| Tier 2 | متوسط | Attack Scoping, Further Analysis, Remediation Support |
+| Tier 3 | خبير | Deep Analysis, Methodology Development, Threat Hunting |
+
+**المميزات:**
+- أدوار واضحة ومسار ترقية محدد
+- Processes منظمة وكفاءة في التسليم
+
+**العيوب:**
+- ممكن يكون مقيد للـ Tier 1
+- بطء في التطور الوظيفي → Revolving Door Problem
+
+### الـ Tierless SOC (غير المتدرج)
+
+**المبدأ:** الكل بيشتغل مع بعض على كل شيء حسب قدراتهم.
+
+**المميزات:**
+- المحللين الجدد يتعلمون أسرع
+- مستوى رضا أعلى عند الموظفين
+- مرونة في التوزيع
+
+**العيوب:**
+- يحتاج Careful Alert Management
+- لازم كل فرد يعرف حدوده
+
+> [!IMPORTANT]
+> مش "أيهما أفضل" — كل نموذج محسّن لظروف مختلفة. الـ Tiered أفضل للمؤسسات الكبيرة، والـ Tierless ممكن يكون أفضل للفرق الصغيرة.
+
+---
+
+## SOC Core Functions
+
+### الوظائف الأساسية (Core SOC)
+
+```mermaid
+flowchart LR
+    A[Data Collection] --> B[Detection]
+    B --> C[Triage and Investigation]
+    C --> D[Incident Response]
+    D --> E[Continuous Improvement]
+    E --> A
+```
+
+| الوظيفة | الوصف |
+|---------|--------|
+| Data Collection | جمع بيانات الأمن من الشبكة والـ Endpoints |
+| Detection | تحديد الأنشطة المشبوهة من البيانات |
+| Triage and Investigation | ترتيب الأولويات والتحقيق في الـ Alerts |
+| Incident Response | الاستجابة لتقليل تأثير الهجوم |
+
+### الوظائف المساعدة (Auxiliary)
+
+| الوظيفة | الوصف |
+|---------|--------|
+| Threat Intelligence | جمع معلومات عن المهاجمين وتكتيكاتهم |
+| Forensics | التحليل العميق لما حدث في الـ Breach |
+| Self-Assessment | Vulnerability Assessment, Pen Testing, Red Team |
+
+---
+
+## The SOC at a High Level
+
+### نظرة مبسطة: Input/Output
+
+الـ SOC ببساطة هو **صندوق** يأخذ مدخلات ويطلع نتائج:
+
+```
+Input 1: Things that happened (Network Traffic, Endpoint Events)
+Input 2: What attacks look like (Threat Intel, Signatures)
+              ↓
+         [  SOC  ]
+              ↓
+Output: Identified, Minimized, and Remediated Incidents
+```
+
+**المبدأ الذهبي:** Garbage In = Garbage Out
+
+كلما كانت المدخلات أفضل (رؤية أوضح للشبكة + Intelligence أحسن)، كلما كانت النتائج أفضل.
+
+### خطوات عمل الـ SOC اليومي
+
+```mermaid
+sequenceDiagram
+    participant ENV as Environment
+    participant COL as Collection
+    participant DET as Detection
+    participant TRI as Triage
+    participant INV as Investigation
+    participant IR as Incident Response
+
+    ENV->>COL: Events and Logs
+    COL->>DET: Processed Logs
+    DET->>TRI: Alerts
+    TRI->>INV: Prioritized Alerts
+    INV->>IR: Confirmed Incidents
+    IR-->>ENV: Remediation Actions
+```
+
+> [!NOTE]
+> معظم المحللين في حياتهم اليومية بيعيشوا في خطوات Triage و Investigation و Incident Response. لكن المحلل المتميز يفهم كل الخطوات من Collection وحتى Remediation.
+
+---
+
+## Critical SOC Information
+
+كل SOC لازم يكون عنده هذي المعلومات حاضرة دايمًا:
+
+| المعلومة | الأهمية |
+|---------|---------|
+| Network Diagram | عشان تعرف وين الـ Traffic يمشي |
+| Points of Visibility | وين عندك Taps و Span Ports و Full PCAP |
+| Data Flow Diagram | كيف الـ Traffic يوصل للإنترنت |
+| Log Flow Diagram | وين الـ Logs بتيجي وبتروح |
+| Incident Response Plan | إيش تعمل لما الكوارث تحدث |
+| Communication Plan | مين تتصل فيه ومتى |
+| Critical Assets List | قائمة أهم Assets في المؤسسة |
+| Disaster Recovery Plans | كيف ترجع للعمل بعد الحادثة |
+
+> [!WARNING]
+> من أكبر الأخطاء إن المحلل يبحث عن Logs ما يلاقيها ويستنتج إن الـ Attack ما صار — بدل ما يدرك إنه ما بيجمع هذا النوع من الـ Logs أصلًا.
+
+---
+
+## Documents Analysts Must Know
+
+### هرم الوثائق
+
+```mermaid
+flowchart TD
+    A[Policies - What must be done] --> B[Standards - How and how much]
+    B --> C[Procedures - Step by step]
+    C --> D[Guidelines - Recommendations]
+    D --> E[Baselines - Specific settings]
+    E --> F[Playbooks / Use Cases - SOC specific]
+```
+
+### تفاصيل كل نوع
+
+| النوع | الإلزامية | المثال |
+|-------|---------|--------|
+| Policy | إلزامي | "جميع الأجهزة يجب أن يكون عليها Antivirus" |
+| Standard | إلزامي | "إعدادات الـ Antivirus يجب أن تكون..." |
+| Procedure | إلزامي | "خطوات تثبيت الـ Antivirus..." |
+| Guideline | اختياري | "أفضل الممارسات لنشر الـ Antivirus..." |
+| Baseline | مرجعي | CIS Benchmarks للأنظمة المختلفة |
+| Playbook | خاص بـ SOC | "كيف تتعامل مع Phishing Alert..." |
+
+> [!TIP]
+> الـ Playbook هو وثيقتك كمحلل. هو اللي يحدد الخطوات الدقيقة لكل نوع حادثة. كلما كان أوضح وأشمل، كلما كان ردك على الحوادث أسرع وأدق.
+
+---
+
+## SOC Metrics
+
+### لماذا نقيس؟
+"That which gets measured, gets done" — اللي بيتقاس، بيتعمل.
+
+الـ Metrics هي الطريقة الوحيدة لتوصيل قيمة الـ SOC لصانعي القرار.
+
+### خصائص الـ Metric الجيد
+
+```mermaid
+flowchart LR
+    A[Good Metric] --> B[Top-Down Derived]
+    A --> C[Actionable]
+    A --> D[Well-Defined and Repeatable]
+    A --> E[Frequently Updated]
+```
+
+| الخاصية | السؤال |
+|--------|---------|
+| Top-Down Derived | أي هدف تحديدًا يساعد هذا الـ Metric في تتبعه؟ |
+| Actionable | إيش بتعمل لو الرقم كبر أو صغر؟ |
+| Well-Defined | لو اثنين يجمعوا نفس الـ Metric، هيطلعوا نفس الرقم؟ |
+| Frequently Updated | هل ممكن يتجمع أوتوماتيكيًا وبسرعة؟ |
+
+### السؤال المهم دايمًا
+> "لو هذا الـ Metric تحسّن، هل الأمان فعلًا تحسّن؟"
+
+لو الإجابة "مش بالضرورة" → هذا Metric خاطئ.
+
+**أمثلة على Metrics مفيدة:**
+- متوسط وقت الاكتشاف (Mean Time to Detect - MTTD)
+- متوسط وقت الاستجابة (Mean Time to Respond - MTTR)
+- عدد الـ True Positives مقارنة بالـ False Positives
+- عدد الحوادث المغلقة في الوقت المحدد
+
+> [!IMPORTANT]
+> لو بتُقاس بـ Metric لا تعتقد إنه مناسب، ناقش مديرك. الـ Metric الخاطئ ممكن يدفعك تعمل أشياء تحسّن الرقم لكن تضر الأمان الحقيقي.
+
+---
+
+## Summary and Exam Checklist
+
+### ملخص النقاط الرئيسية
+
+- **الـ SOC** يقوم على ثلاثة أعمدة: People و Process و Technology
+- **الـ People** هم الأهم — بدونهم لا شيء يعمل
+- **الأسئلة الأربعة** هي منطلق بناء أي SOC: ماذا نحمي، ما التهديدات، كيف نكتشف، كيف نستجيب
+- **الـ Charter** يعطي الفريق الشرعية للعمل ويوضح حدوده
+- **الـ Steering Committee** يضمن التوافق المستمر مع أهداف المؤسسة
+- **الـ Risk Appetite** يختلف من مؤسسة لأخرى ويتغير مع الوقت
+- **الاختراق سيحدث** — السؤال هو كيف نقلل تأثيره
+- **الـ Tiered vs Tierless** كلاهما صحيح — كل واحد محسّن لظروف مختلفة
+- **الوظائف الأساسية:** Collection → Detection → Triage → Investigation → Incident Response
+- **الـ Metrics** لازم تكون Actionable وTop-Down وRepeatable
+
+### Exam-Ready Checklist
+
+- [ ] أعرف الفرق بين People و Process و Technology وأهمية كل منها
+- [ ] أقدر أجاوب على الأسئلة الأربعة الأساسية لأي SOC
+- [ ] أفهم الغرض من الـ SOC Charter ومن يعتمده
+- [ ] أفهم ما هو الـ Steering Committee ودوره
+- [ ] أفهم مفهوم الـ Risk Appetite وأعطي أمثلة عليه
+- [ ] أعرف الـ Blue Team Truth #1: الاختراق سيحدث
+- [ ] أعرف الـ Blue Team Truth #2: الشركة لا تعيش فقط لتكون آمنة
+- [ ] أفهم الفرق بين الـ Tiered والـ Tierless SOC
+- [ ] أعرف الوظائف الأساسية للـ SOC (Core Functions)
+- [ ] أعرف الفرق بين Policy و Standard و Procedure و Guideline و Baseline و Playbook
+- [ ] أفهم ما هو الـ Metric الجيد وخصائصه الأربعة
+- [ ] أعرف المعلومات الحرجة التي يجب أن يمتلكها كل SOC
+
+---
+
+*SANS SEC450 — Blue Team Fundamentals: Security Operations and Analysis*
+*Module 1: SOC Overview*
+*© Notes prepared for educational purposes based on SANS course material*
