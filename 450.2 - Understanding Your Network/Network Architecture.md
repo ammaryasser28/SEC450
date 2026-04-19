@@ -19,7 +19,7 @@
 - [Diagrams](#diagrams)
 - [Comparison Tables](#comparison-tables)
 - [Key Notes](#key-notes)
-- [Summary and Exam Checklist](#summary-and-exam-checklist)
+- [Summary](#summary)
 
 ---
 
