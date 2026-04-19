@@ -327,7 +327,7 @@ flowchart LR
 
 ---
 
-## Summary & Exam Checklist
+## Summary
 
 ### ملخص سريع
 
