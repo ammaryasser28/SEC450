@@ -392,7 +392,7 @@ flowchart TD
 
 ---
 
-## Summary and Exam Checklist
+## Summary
 
 ### المفاهيم الأساسية
 
