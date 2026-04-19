@@ -406,19 +406,5 @@ flowchart TD
 - **Flat Network** = شبكة بدون Segmentation = خطر عالٍ جداً
 - **NetFlow** = بيانات عن التريفيك (مين كلم مين، قد إيه) من الـ Routers والـ Switches
 
-### Exam-Ready Checklist
-
-- [ ] أعرف أقول إيه الفرق بين الـ Router، Switch، والـ Firewall من منظور Security
-- [ ] أعرف أشرح إيه الـ Network Zones وليه مهمة
-- [ ] أعرف أفرق بين SPAN Port وNetwork Tap ومتى أستخدم كل منهم
-- [ ] أعرف أشرح ليه الـ Flat Network خطيرة
-- [ ] أعرف الفرق بين Traditional Firewall وNGFW
-- [ ] أعرف المبادئ الخمسة للـ Zero-Trust
-- [ ] أعرف أشرح قصة WannaCry وربطها بـ Network Segmentation
-- [ ] أعرف إيه اللي يجي في الـ SOC Diagram (Zones + Taps + NetFlow sources)
-- [ ] أعرف إن الـ Router شايف Inter-Zone Traffic بس، مش Intra-Zone
-- [ ] أعرف إن الـ NGFW هو أول خطوة نحو Zero-Trust
-
-
 
 
