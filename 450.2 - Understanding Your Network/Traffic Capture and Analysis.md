@@ -14,7 +14,7 @@
 - [Comparison Diagram](#comparison-diagram)
 - [Comparison Table](#comparison-table)
 - [Key Notes](#key-notes)
-- [Summary & Exam Checklist](#summary--exam-checklist)
+- [Summary](#summary)
 
 ---
 
