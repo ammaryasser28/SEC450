@@ -15,7 +15,7 @@
 - [مخطط شامل للـ DNS](#dns-diagrams)
 - [جداول مقارنة](#comparison-tables)
 - [ملاحظات مهمة](#key-notes)
-- [ملخص واختبار ذاتي](#summary)
+- [ملخص](#summary)
 
 ---
 
