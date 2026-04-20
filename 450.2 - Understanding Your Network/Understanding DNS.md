@@ -27,8 +27,7 @@
 
 ---
 
-## ليه نهتم بالـ DNS؟ {#why-dns-matters}
-
+## why-dns-matters
 ### الفكرة الأساسية: دليل التليفون الرقمي
 
 تخيل إنك عايز تتصل بـ John بس ما تعرفش رقمه، فبتدور في دليل التليفون على اسمه وبتلاقي الرقم. الـ DNS بيعمل نفس الموضوع بالضبط للإنترنت.
@@ -55,7 +54,7 @@
 
 ---
 
-## أنواع الـ DNS Servers والـ Clients {#dns-server-client-types}
+## dns-server-client-types
 
 ### 1. Stub Resolver
 
@@ -97,8 +96,7 @@ ipconfig /displaydns
 
 ---
 
-## رحلة الـ DNS Query {#dns-lookup-route}
-
+## dns-lookup-route
 ### الـ Flow الكامل
 
 لما بتكتب `google.com` في المتصفح وما فيش حاجة في الـ Cache، الرحلة بتتم على النحو ده:
@@ -124,7 +122,7 @@ ipconfig /displaydns
 
 ---
 
-## أنواع الـ DNS Records {#dns-record-types}
+## dns-record-types
 
 ### A Record و AAAA Record
 
@@ -237,8 +235,7 @@ google.com  →  NS  →  ns1.google.com
 
 ---
 
-## العلاقات الكثيرة في الـ DNS {#dns-many-to-many}
-
+## dns-many-to-many
 ### قواعد مهمة لازم تحفظها
 
 هذه القواعد مهمة جداً في التحقيقات الأمنية:
@@ -271,7 +268,7 @@ google.com  →  NS  →  ns1.google.com
 
 ---
 
-## مخاطر سوء فهم الـ DNS {#dns-misunderstanding-dangers}
+## dns-misunderstanding-dangers
 
 ### PTR Records مش موثوق فيها
 
@@ -294,8 +291,7 @@ google.com  →  A Record  →  142.250.6.206
 
 ---
 
-## مخطط شامل للـ DNS {#dns-diagrams}
-
+## dns-diagrams
 ### مخطط رحلة الـ DNS Query
 
 ```mermaid
@@ -360,8 +356,7 @@ flowchart TD
 
 ---
 
-## جداول مقارنة {#comparison-tables}
-
+## comparison-tables
 ### جدول أنواع الـ DNS Records الكاملة
 
 | النوع | الكود | الاستخدام | مثال |
@@ -398,7 +393,7 @@ flowchart TD
 
 ---
 
-## ملاحظات مهمة {#key-notes}
+## key-notes
 
 > [!IMPORTANT]
 > الـ **PTR Record** مش موثوق فيه! ما تبنيش قراراتك الأمنية عليه لوحده. دايماً اتحقق من الـ A Record مقارنةً بالـ PTR.
@@ -420,7 +415,7 @@ flowchart TD
 
 ---
 
-##Summary
+## Summary
 ### النقاط الأساسية
 
 - الـ **DNS** هو "دليل التليفون" للإنترنت، بيترجم الأسماء لأرقام
