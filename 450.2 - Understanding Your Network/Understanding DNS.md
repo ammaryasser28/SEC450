@@ -420,8 +420,7 @@ flowchart TD
 
 ---
 
-## ملخص واختبار ذاتي {#summary}
-
+##Summary
 ### النقاط الأساسية
 
 - الـ **DNS** هو "دليل التليفون" للإنترنت، بيترجم الأسماء لأرقام
@@ -433,20 +432,3 @@ flowchart TD
 - علاقة الـ DNS **Many-to-Many**: Domain واحد → أكتر من IP، وأكتر من Domain → IP واحد
 - دايماً ابلوك الـ **Domain** مش الـ **IP** لتجنب Collateral Damage
 - الـ **TTL** بيحدد قد إيه الإجابة تتحفظ في الـ Cache
-
-### اختبار ذاتي (Exam Checklist)
-
-- [ ] تعرف تشرح ليه الـ DNS مهم لأي SOC Analyst
-- [ ] تعرف الفرق بين الـ Stub Resolver والـ Forwarding Server والـ Recursive Server والـ Authoritative Server
-- [ ] تعرف ترسم رحلة الـ DNS Query خطوة خطوة
-- [ ] تعرف تفسر الـ A Record وتعرف إن ممكن يرجع أكتر من IP
-- [ ] تعرف ليه الـ PTR Record مش موثوق فيه
-- [ ] تعرف استخدامات الـ TXT Record (SPF, DKIM)
-- [ ] تعرف تفسر العلاقة الـ Many-to-Many في الـ DNS
-- [ ] تعرف مخطورة إنك تبلوك IP بناءً على Domain مشبوه بدون تحقيق
-- [ ] تعرف أوامر الـ nslookup الأساسية للـ DNS Analysis
-- [ ] تفهم إن الـ TTL المنخفض ممكن يكون مؤشر خطر
-
----
-
-*تم إعداد هذه الملاحظات بناءً على محتوى **SANS SEC450 - Blue Team Fundamentals** الـ Section الثاني: Understanding Your Network.*
