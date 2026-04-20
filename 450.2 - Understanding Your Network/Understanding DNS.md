@@ -5,17 +5,19 @@
 
 ## Table of Contents
 
+
 - [Introduction](#introduction)
-- [ليه نهتم بالـ DNS؟](#why-dns-matters)
-- [أنواع الـ DNS Servers والـ Clients](#dns-server-client-types)
-- [رحلة الـ DNS Query](#dns-lookup-route)
-- [أنواع الـ DNS Records](#dns-record-types)
-- [العلاقات الكثيرة في الـ DNS](#dns-many-to-many)
-- [مخاطر سوء فهم الـ DNS](#dns-misunderstanding-dangers)
-- [مخطط شامل للـ DNS](#dns-diagrams)
-- [جداول مقارنة](#comparison-tables)
-- [ملاحظات مهمة](#key-notes)
-- [ملخص](#summary)
+- [why-dns-matters](#why-dns-matters)
+- [dns-server-client-types)](#dns-server-client-types)
+- [dns-lookup-route](#dns-lookup-route)
+- [dns-record-types](#dns-record-types)
+- [dns-many-to-many](#dns-many-to-many)
+- [dns-misunderstanding-dangers](#dns-misunderstanding-dangers)
+- [dns-diagrams](#dns-diagrams)
+- [comparison-tables](#comparison-tables)
+- [key-notes](#key-notes)
+- [summary](#summary)
+
 
 ---
 
