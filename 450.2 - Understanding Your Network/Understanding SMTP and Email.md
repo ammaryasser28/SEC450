@@ -458,7 +458,7 @@ flowchart TD
 
 ---
 
-## Summary and Exam Checklist
+## Summary 
 
 ### أهم النقاط
 
