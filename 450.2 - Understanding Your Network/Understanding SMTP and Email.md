@@ -317,7 +317,7 @@ dkim=pass
 
 ---
 
-## DMARC
+## DMARC - Domain-based Message Authentication, Reporting & Conformance
 
 ### المشكلة اللي DMARC بيحلها
 
