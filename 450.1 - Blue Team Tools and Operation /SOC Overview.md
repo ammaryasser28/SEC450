@@ -1,498 +1,401 @@
-# SANS SEC450 | Blue Team Fundamentals
-## Module 1 — SOC Overview: نظرة عامة على مركز عمليات الأمن
 
----
-
-**SANS 450 | Blue Team Operations**
-**Module 1 — SOC Overview**
-
-| # | Topic | الموضوع |
-|---|-------|---------|
-| 1 | Components of Security Operations | مكونات عمليات الأمن: People, Process, Technology |
-| 2 | Understanding the SOC Mission | فهم مهمة الـ SOC والأسئلة الأربعة الأساسية |
-| 3 | SOC Charter & Steering Committee | الـ Charter والـ Steering Committee |
-| 4 | Risk Appetite | مفهوم الـ Risk Appetite وكيفية التعامل معه |
-| 5 | Blue Team Truths | الحقائق الأساسية للـ Blue Team |
-| 6 | SOC Organizational Structure | الهيكل التنظيمي للـ SOC: Tiered vs Tierless |
-| 7 | SOC Core Functions | الوظائف الأساسية للـ SOC |
-| 8 | Critical SOC Documents | الوثائق المهمة التي يجب على المحلل معرفتها |
-| 9 | SOC Metrics | قياس وإيصال أداء الـ SOC |
+> **الهدف من الـ Section ده:**
+> هتفهم إيه هو الـ SOC (Security Operations Center) وإزاي بيشتغل، وإيه المكونات الأساسية اللي بتخليه يشتغل صح — من People وProcess وTechnology، وصولاً للـ Org Charts والـ Metrics.
 
 ---
 
 ## Table of Contents
+
 - [Introduction](#introduction)
-- [The Three Pillars: People, Process, Technology](#the-three-pillars-people-process-technology)
-- [The Four Core Questions](#the-four-core-questions)
-- [SOC Charter and Steering Committee](#soc-charter-and-steering-committee)
+- [المكونات الثلاثة للـ SOC](#المكونات-الثلاثة-للـ-soc)
+- [الأسئلة الأربعة لتحديد المهمة](#الأسئلة-الأربعة-لتحديد-المهمة)
+- [SOC Charter والـ Steering Committee](#soc-charter-والـ-steering-committee)
 - [Risk Appetite](#risk-appetite)
 - [Blue Team Truths](#blue-team-truths)
-- [SOC Organizational Structure](#soc-organizational-structure)
+- [هيكل الـ SOC والـ Org Chart](#هيكل-الـ-soc-والـ-org-chart)
 - [Tiered vs Tierless SOCs](#tiered-vs-tierless-socs)
-- [SOC Core Functions](#soc-core-functions)
-- [The SOC at a High Level](#the-soc-at-a-high-level)
-- [Critical SOC Information](#critical-soc-information)
-- [Documents Analysts Must Know](#documents-analysts-must-know)
+- [خطوات عمل الـ SOC](#خطوات-عمل-الـ-soc)
+- [وظائف الـ SOC Core vs Specialty](#وظائف-الـ-soc-core-vs-specialty)
+- [المعلومات الحيوية اللي لازم يكون عندك](#المعلومات-الحيوية-اللي-لازم-يكون-عندك)
+- [أنواع الوثائق في الـ SOC](#أنواع-الوثائق-في-الـ-soc)
 - [SOC Metrics](#soc-metrics)
-- [Summary and Exam Checklist](#summary-and-exam-checklist)
-
+- [Summary](#summary)
 ---
 
 ## Introduction
 
-الـ SOC أو Security Operations Center هو قلب عمليات الأمن السيبراني في أي مؤسسة. في هذا الـ Module، هنتكلم عن الأساسيات اللي لازم كل محلل أمني يعرفها قبل ما يبدأ شغله اليومي.
+الـ SOC هو المركز اللي بيتم فيه مراقبة وتحليل والرد على التهديدات السيبرانية في المنظمة. مش مجرد غرفة بملشات وشاشات — ده نظام متكامل من الناس والأدوات والعمليات.
 
-الـ Blue Team — وهو الاسم الشائع للفريق الدفاعي — مهمته مش بس "بلوك الهاكرز". المهمة الحقيقية هي:
+الهدف الرئيسي بيتلخص في جملة واحدة من الـ Cyberwire:
 
 > **"Reduce the probability of material impact to my organization due to a cyber event."**
-> — Rick Howard, CSO and Chief Analyst @ CyberWire
 
-يعني: **قلّل احتمالية إن أي حدث سيبراني يأثر بشكل حقيقي على المؤسسة.**
+يعني مش هدفنا نعمل network مثالي مينفعش يتاخترق — ده مستحيل. هدفنا نقلل تأثير أي هجوم قد يحصل.
 
 ---
 
-## The Three Pillars: People, Process, Technology
+## المكونات الثلاثة للـ SOC
 
-أي SOC يحتاج 3 عناصر أساسية تشتغل مع بعض. تقدر تفكر فيهم زي "الكرسي ذو ثلاث أرجل" — لو واحدة وقعت، الكل وقع.
+الـ SOC بيقوم على **3 أرجل** — لو واحدة وقعت، الكرسي وقع:
 
-### الـ People (الناس)
-الناس هم **قلب وروح** الـ Blue Team. من غير فريق متحمس ومدرب، ما فيش أداة أو عملية بتفيد. اختيار الناس الصح ممكن يفرق بين SOC ناجح وآخر فاشل.
+### 1. People (الناس)
 
-- بيعملوا الـ Analysis والـ Investigation
-- بيصمموا الـ Processes وبيشغلوها
-- لو الـ Analysts مش سعداء = Revolving Door = ما فيش استقرار
+الناس هم القلب النابض للـ SOC. مفيش Technology أو Process تعوض عن فريق مُدرَّب وسعيد ومتحفز. اختيار الناس الصح ممكن يصنع أو يدمر الفريق.
 
-### الـ Process (العملية)
-الـ Process هو **التسلسل المحدد من الخطوات** اللي بتوصلك للنتيجة المطلوبة.
+### 2. Process (العملية)
 
-- بيحدد إيش بالضبط هيعمله الفريق وإزاي
-- بيضمن إن الشغل يتعمل بطريقة قابلة للتكرار والقياس
-- من غير Process واضح، كل محلل بيشتغل بطريقته الخاصة
+الـ Process هو التسلسل المحدد من الخطوات اللي بيعمله الناس. بيحدد **إيه** اللي بيتعمل و**إزاي** بيتعمل. بدون Process واضح، كل واحد بيشتغل بطريقته وبتلاقي نتائج مختلفة.
 
-### الـ Technology (التقنية)
-التقنية هي **المُمكِّن** — مش البديل عن الإنسان.
+### 3. Technology (التكنولوجيا)
 
-- بتخلي الشغل اليدوي يتعمل على نطاق واسع (Scale)
-- **Force Multiplier** — بتضاعف قدرات الفريق
-- لو المحلل ممكن تستبدله بأداة، معناه كان بيعمل شغل Automation من الأصل!
+التكنولوجيا هي الـ Multiplier — بتخلي الناس أكثر قدرة وأسرع. لكن مهم تعرف: الـ Technology مش بديل للناس، هي أداة في إيد الناس.
 
 ```mermaid
 flowchart TD
     A[People] --> D[Effective SOC Defense]
     B[Process] --> D
     C[Technology] --> D
-    D --> E[Identified and Remediated Incidents]
+    D --> E[Reduced Risk to Organization]
 ```
 
 > [!IMPORTANT]
-> التقنية مش بديل عن الناس. لو الأدوات هي اللي بتحل كل المشاكل، إذن ما كانت تحتاج محلل من الأصل. الإنسان هو اللي بيفكر، يحلل، ويقرر.
+> الـ Technology مش بتحل محل الـ People. لو الـ Analyst بيعمل شغل ممكن الـ Automation تعمله، يبقى الـ Analyst مش بيشتغل صح من الأساس.
 
 ---
 
-## The Four Core Questions
+## الأسئلة الأربعة لتحديد المهمة
 
-قبل ما تبني SOC أو تقيّمه، لازم تقدر تجاوب على هذي الأسئلة الأربعة:
+من كتاب "Crafting the Infosec Playbook" — 4 أسئلة لازم كل SOC يجاوب عليهم:
 
-### السؤال 1: What are we trying to protect?
-إيش اللي بنحاول نحميه؟
-- البيانات الحساسة؟ الـ Intellectual Property؟ الـ Critical Infrastructure؟
-- مش بس "بيانات الشركة" — لازم تكون محدد أكثر: أي بيانات، وين موجودة، ومين عنده وصول؟
+| # | السؤال | الهدف منه |
+|---|--------|-----------|
+| 1 | **What are we trying to protect?** | تحديد الـ Assets الحيوية |
+| 2 | **What are the threats?** | فهم المهاجمين وأساليبهم |
+| 3 | **How do we detect them?** | اختيار الـ Tools والـ Sensors المناسبة |
+| 4 | **How will we respond?** | تجهيز خطط الرد والـ Playbooks |
 
-### السؤال 2: What are the threats?
-إيش التهديدات اللي تواجهنا؟
-- Ransomware؟ APT؟ Insiders؟
-- بتختلف حسب الصناعة والمنطقة الجغرافية
-- الإجابة هنا بتبني الـ Threat Intelligence Program
+> [!TIP]
+> مش كفاية تقول "بنحمي بيانات الشركة من APTs" — لازم تعرف **أي** APTs، **إزاي** بيهاجموا، **أي** بيانات بالظبط، **فين** بتتخزن. كلما زادت التفاصيل، زادت فرص النجاح.
 
-### السؤال 3: How do we detect them?
-كيف نكتشف هذي التهديدات؟
-- SIEM Rules؟ IDS Signatures؟ EDR Alerts؟
-- بتحتاج تفهم كيف تسوي Detection لكل نوع تهديد
+---
 
-### السؤال 4: How will we respond?
-كيف هنرد على الحادثة؟
-- Incident Response Plan
-- Communication Plan
-- Recovery Procedures
+## SOC Charter والـ Steering Committee
+
+### SOC Charter
+
+الـ Charter هو الوثيقة التأسيسية للـ SOC — زي الدستور. بيحدد:
+
+- **Constituency**: مين اللي بنحميه؟
+- **Services**: إيه الخدمات اللي بنقدمها؟
+- **Scope**: إيه حدود صلاحياتنا؟
+- **Mission Statement**: جملة مختصرة توضح هدف الفريق
+- **Organizational Structure**: إزاي الفريق منظم؟
 
 > [!NOTE]
-> الأسئلة الأربعة دي مش بس للتأسيس — لازم تراجعها دوريًا لأن التهديدات والفريق والمؤسسة كلها بتتغير مع الوقت.
+> الـ Charter مش وثيقة جامدة — هي وثيقة حية (Living Document) لازم تتحدث مع تطور التهديدات والمنظمة.
 
----
+### Steering Committee
 
-## SOC Charter and Steering Committee
+الـ Steering Committee هو اجتماع دوري مع Stakeholders الأساسيين في المنظمة. هدفه:
 
-### الـ SOC Charter
-الـ Charter هو **الوثيقة التأسيسية** للـ SOC. فكر فيه زي "دستور الفريق".
-
-**الـ Charter بيتضمن:**
-
-| العنصر | الوصف |
-|--------|--------|
-| Constituency Served | مين هم العملاء الداخليين للـ SOC؟ |
-| Services to be Delivered | إيش الخدمات اللي يقدمها الـ SOC؟ |
-| Scope of Work | حدود عمل الفريق |
-| Mission Statement | رسالة الفريق العليا |
-| Organizational Structure | الهيكل التنظيمي |
-
-- بيعطي الـ Blue Team **السلطة القانونية** لمراقبة الشبكة والتحقيق في الحوادث
-- لازم يكون معتمد من الـ Management
-- هو **Living Document** — يتحدث مع تطور المؤسسة
-
-### الـ Steering Committee
-الـ Steering Committee هو **اجتماع دوري** مع أصحاب المصلحة الرئيسيين في الـ SOC.
-
-**دوره:**
-- يضمن إن الـ SOC متوافق مع أهداف المؤسسة
-- يطرح مخاوف الـ Risk من جانب الأعمال
-- يربط أداء الـ SOC باحتياجات الشركة
+- التأكد إن الـ SOC شاغل وقته في اللي يهم المنظمة فعلاً
+- محاذاة قدرات الـ SOC مع احتياجات البيزنس
+- مناقشة الـ Risk Priorities
 
 ```mermaid
 flowchart LR
-    A[Business Stakeholders] --> B[Steering Committee]
-    B --> C[SOC Charter Update]
-    C --> D[SOC Operations]
-    D --> E[Metrics and Reports]
-    E --> B
+    A[Business Leadership] --> B[Steering Committee]
+    C[SOC Team] --> B
+    B --> D[Aligned SOC Charter]
+    D --> E[Right Controls Deployed]
+    D --> F[Right Metrics Tracked]
 ```
 
 ---
 
 ## Risk Appetite
 
-### مفهوم الـ Risk Appetite
-الـ Risk Appetite هو **مقدار المخاطرة اللي المؤسسة مستعدة تتقبله**.
+### إيه هو الـ Risk Appetite؟
 
-مثال من الحياة الواقعية:
-- **حكومة أو عسكري:** Risk Appetite منخفض جدًا → ضوابط أمنية صارمة جدًا
-- **Startup صغيرة:** Risk Appetite أعلى → تركيز على السرعة وليس الأمان
-- **بنك:** وسط → توازن بين الأمان وراحة العميل
+الـ Risk Appetite هو مقدار المخاطرة اللي المنظمة مستعدة تتقبله. مش كل المنظمات زي بعض:
 
-### المقياس
+| نوع المنظمة | Risk Appetite | المتوقع |
+|-------------|--------------|---------|
+| Military / Government | منخفض جداً | Controls صارمة جداً |
+| Hospital / Healthcare | منخفض | بيانات مرضى حساسة جداً |
+| Enterprise Company | متوسط | Balance بين Security وProductivity |
+| Startup جديد | مرتفع | السرعة أهم من الأمان في البداية |
 
-```
-No Security ←————————————————→ Tight Security
-             Reasonable Security
-```
+### Risk Appetite Meets Reality — مثال عملي
 
-### حقيقة مهمة
-> الشركات مش موجودة **عشان تكون آمنة** — موجودة عشان تحقق قيمة اقتصادية.
-> الأمن هو **وظيفة منع الخسائر** (Loss Prevention Function).
+تخيل بتشتغل في شركة أدوية. في ماكينة إنتاج بتشغل Windows XP ومش ممكن تتغير لأسباب قانونية. الماكينة دي بتستخدم FTP مش مشفر وبيها Web Server قديم.
 
-فكر فيها زي حارس الأمن في متجر:
-- ممكن تعمل تفتيش TSA على كل زبون → 0% سرقة لكن 100% عملاء يهربون
-- لازم توازن بين الأمان واستمرار العمل
+**الحل المغلوط:** تقول للإدارة "الماكينة دي خطرة جداً، لازم نوقفها."  
+← الرد: "الماكينة دي بتنتج X دولار في الساعة، لأ!"
 
-### مثال واقعي: Risk Appetite meets Reality
-تخيل إنك بتشتغل في شركة أدوية، وعندهم ماكينة إنتاج بتشغّل Windows XP ولا يقدروا يغيروها:
-- ما ينفع تثبت Antivirus عليها
-- ما تقدر تحدث الـ OS
-- محتاجة تبعت بيانات عبر FTP
-
-**الحل الخاطئ:** "ما نستخدمها" → ستُطرد فورًا!
-
-**الحل الصح:** Compensating Controls خارجية:
-- Firewall خارجي يتحكم في الـ Traffic
-- Web Application Firewall
-- Network-level Antivirus Scanning
-- Strict Allow-list للـ Communication
+**الحل الصح:** تطبّق **Compensating Controls** من برّة الجهاز:
+- Network Firewall يقفل كل البورتات إلا اللي محتاجها
+- Antivirus Network Appliance يفحص الـ Traffic
+- Web Application Firewall للـ Web Server القديم
 
 > [!WARNING]
-> لما المؤسسة تقبل Risk معين بعد ما شرحت له المخاطر، وثّق ذلك كتابيًا. مهمتك إنك تعطيهم معلومات دقيقة، مش إنك تتخذ القرار عنهم.
+> دورك كـ Blue Team مش إنك ترفض كل خطر — دورك إنك تفهم الخطر وتشرحه للإدارة وتقترح حلول عملية تتناسب مع متطلبات البيزنس.
 
 ---
 
 ## Blue Team Truths
 
-### الحقيقة الأولى: Compromise Will Happen
-**الاختراق سيحدث — مش السؤال هل بل متى.**
-
-السؤال الحقيقي: **كيف هيأثر عليك؟**
-
-| النتيجة | الوصف |
-|--------|--------|
-| Outcome 1 (Ideal) | المهاجم ينجح في الخطوات الأولى، لكن يُكتشف سريعًا ويفشل في تحقيق هدفه |
-| Outcome 2 (Disaster) | المهاجم ما يتكشف، يتحرك بحرية، ويحقق أهدافه الكاملة |
+### Blue Team Truth #1: الاختراق سيحصل
 
 ```mermaid
 flowchart TD
-    A[Attack Begins] --> B{Detected Early?}
-    B -->|Yes| C[Limited Damage]
-    B -->|No| D[Full Breach]
-    C --> E[Quick Recovery]
-    D --> F[Expensive Recovery and PR Damage]
+    A[Attack Happens] --> B{Detected Early?}
+    B -->|Yes| C[Attacker Fails to Complete Mission]
+    B -->|No| D[Full Breach - Expensive Damage]
+    C --> E[Low Cost Recovery]
+    D --> F[High Cost Recovery + Reputation Damage]
 ```
 
-**الهدف:** اكتشف بكير وقلل الضرر.
+الحقيقة المرة: مفيش دفاع كامل 100%. اللي بيفرق بين SOC كويس وSOC مش كويس هو **سرعة الكشف والرد**.
 
-### الحقيقة الثانية: Your Company Doesn't Exist to Be Secure
-**شركتك مش موجودة عشان تكون آمنة فقط.**
+### Blue Team Truth #2: الشركة مش موجودة عشان تكون آمنة
 
-الـ Blue Team بيقدم **Loss Prevention Function** — زي حراس الأمن في المتجر.
+الـ Cybersecurity هي وظيفة "Loss Prevention" — زي الأمن في المحل. تخيل محل بيعمل تفتيش TSA عند الدخول والخروج — مش هيبيع حاجة!
 
-- لازم يكون في توازن بين الأمان والإنتاجية
-- القرار بمستوى الأمان يتحكم فيه الـ Management
-- دورك تعطيهم معلومات دقيقة ليتخذوا قرار مبني على بيانات صحيحة
-
-> [!TIP]
-> لما تختلف مع قرار أمني، حاول تشرح السبب بأرقام وتأثير على الأعمال. الأرقام بتقنع الإدارة أكثر من الحجج التقنية المجردة.
+اللي عليك تعمله:
+- تفهم الـ Risk اللي الشركة مستعدة تتقبله
+- توازن بين الأمان ومتطلبات الإنتاجية
+- تبلّغ الإدارة بالمخاطر الحقيقية بشكل واضح
 
 ---
 
-## SOC Organizational Structure
-
-### الهيكل التنظيمي النموذجي
+## هيكل الـ SOC والـ Org Chart
 
 ```mermaid
 flowchart TD
-    A[SOC Lead] --> B[Analysts]
-    A --> C[Detection Engineering]
-    A --> D[Incident Response]
-    A --> E[Engineering and Infrastructure]
-    B --> B1[Tier 1]
-    B --> B2[Tier 2 and 3 / SMEs]
-    D --> D1[Incident Lead]
-    F[SOC-Adjacent Functions] --> G[Threat Intelligence]
-    F --> H[Forensics]
-    F --> I[Vulnerability Management]
-    F --> J[Pen Testing / Red Teams]
+    A[SOC Lead] --> B[Analysts - Tier 1]
+    A --> C[Analysts - Tier 2 and 3 / SMEs]
+    A --> D[Detection Engineering]
+    A --> E[Incident Response]
+    A --> F[Engineering and Infrastructure]
+    
+    G[SOC-Adjacent Functions] --> H[Threat Intelligence]
+    G --> I[Forensics]
+    G --> J[Vulnerability Management]
+    G --> K[Pen Testing / Red Teams]
 ```
 
-> [!NOTE]
-> ما في هيكل تنظيمي "صح" وحيد للـ SOC. يختلف حسب حجم المؤسسة ومتطلباتها. المهم إن الفرق كلها تتواصل بفعالية.
+مفيش هيكل "مثالي" — كل منظمة بتختار الهيكل اللي بيناسبها. المهم إن الفريق كله يشتغل مع بعض بكفاءة.
 
 ---
 
 ## Tiered vs Tierless SOCs
 
-### الـ Tiered SOC (المتدرج)
+### Tiered SOC (المستويات)
 
-| Tier | المستوى | المهام الرئيسية |
-|------|--------|----------------|
-| Tier 1 | مبتدئ | Initial Triage, Ticket Generation |
-| Tier 2 | متوسط | Attack Scoping, Further Analysis, Remediation Support |
-| Tier 3 | خبير | Deep Analysis, Methodology Development, Threat Hunting |
+الـ Tiered SOC فيه مستويات محددة:
 
-**المميزات:**
-- أدوار واضحة ومسار ترقية محدد
-- Processes منظمة وكفاءة في التسليم
+| المستوى | المسمى | المهام |
+|---------|--------|--------|
+| **Tier 1** | Entry Level Analyst | Initial Triage، فتح Tickets |
+| **Tier 2** | Mid-Level Analyst | تحليل أعمق، تحديد نطاق الهجوم |
+| **Tier 3** | Senior Analyst / SME | تحليل معقد، Threat Hunting، تطوير المنهجية |
 
-**العيوب:**
-- ممكن يكون مقيد للـ Tier 1
-- بطء في التطور الوظيفي → Revolving Door Problem
+**مميزات:** مسار واضح للترقي، عمليات منظمة.  
+**عيوب:** ممكن يكون محدود للغاية ويؤدي لـ Burnout وارتفاع معدل الاستقالات.
 
-### الـ Tierless SOC (غير المتدرج)
+### Tierless SOC (بدون مستويات)
 
-**المبدأ:** الكل بيشتغل مع بعض على كل شيء حسب قدراتهم.
+الكل يشتغل مع بعض على كل حاجة — حسب قدراتهم.
 
-**المميزات:**
-- المحللين الجدد يتعلمون أسرع
-- مستوى رضا أعلى عند الموظفين
-- مرونة في التوزيع
-
-**العيوب:**
-- يحتاج Careful Alert Management
-- لازم كل فرد يعرف حدوده
-
-> [!IMPORTANT]
-> مش "أيهما أفضل" — كل نموذج محسّن لظروف مختلفة. الـ Tiered أفضل للمؤسسات الكبيرة، والـ Tierless ممكن يكون أفضل للفرق الصغيرة.
-
----
-
-## SOC Core Functions
-
-### الوظائف الأساسية (Core SOC)
+**مميزات:** تعلم أسرع، محللين أكثر سعادة، Retention أحسن.  
+**عيوب:** محتاج انضباط ذاتي أعلى وإدارة أذكى للـ Alerts.
 
 ```mermaid
 flowchart LR
-    A[Data Collection] --> B[Detection]
-    B --> C[Triage and Investigation]
-    C --> D[Incident Response]
-    D --> E[Continuous Improvement]
-    E --> A
-```
-
-| الوظيفة | الوصف |
-|---------|--------|
-| Data Collection | جمع بيانات الأمن من الشبكة والـ Endpoints |
-| Detection | تحديد الأنشطة المشبوهة من البيانات |
-| Triage and Investigation | ترتيب الأولويات والتحقيق في الـ Alerts |
-| Incident Response | الاستجابة لتقليل تأثير الهجوم |
-
-### الوظائف المساعدة (Auxiliary)
-
-| الوظيفة | الوصف |
-|---------|--------|
-| Threat Intelligence | جمع معلومات عن المهاجمين وتكتيكاتهم |
-| Forensics | التحليل العميق لما حدث في الـ Breach |
-| Self-Assessment | Vulnerability Assessment, Pen Testing, Red Team |
-
----
-
-## The SOC at a High Level
-
-### نظرة مبسطة: Input/Output
-
-الـ SOC ببساطة هو **صندوق** يأخذ مدخلات ويطلع نتائج:
-
-```
-Input 1: Things that happened (Network Traffic, Endpoint Events)
-Input 2: What attacks look like (Threat Intel, Signatures)
-              ↓
-         [  SOC  ]
-              ↓
-Output: Identified, Minimized, and Remediated Incidents
-```
-
-**المبدأ الذهبي:** Garbage In = Garbage Out
-
-كلما كانت المدخلات أفضل (رؤية أوضح للشبكة + Intelligence أحسن)، كلما كانت النتائج أفضل.
-
-### خطوات عمل الـ SOC اليومي
-
-```mermaid
-sequenceDiagram
-    participant ENV as Environment
-    participant COL as Collection
-    participant DET as Detection
-    participant TRI as Triage
-    participant INV as Investigation
-    participant IR as Incident Response
-
-    ENV->>COL: Events and Logs
-    COL->>DET: Processed Logs
-    DET->>TRI: Alerts
-    TRI->>INV: Prioritized Alerts
-    INV->>IR: Confirmed Incidents
-    IR-->>ENV: Remediation Actions
+    A[Alert Comes In] --> B{Tiered SOC}
+    B --> C[Tier 1 handles first]
+    C --> D[Escalate to Tier 2]
+    D --> E[Maybe escalate to Tier 3]
+    
+    A --> F{Tierless SOC}
+    F --> G[Any analyst picks it up based on capability]
+    G --> H[Collaboration as needed]
 ```
 
 > [!NOTE]
-> معظم المحللين في حياتهم اليومية بيعيشوا في خطوات Triage و Investigation و Incident Response. لكن المحلل المتميز يفهم كل الخطوات من Collection وحتى Remediation.
+> استطلاعات الطلاب في SANS بتظهر إن أكتر من نص المنظمات بتشتغل بنموذج Tierless أو قريب منه.
 
 ---
 
-## Critical SOC Information
+## خطوات عمل الـ SOC
 
-كل SOC لازم يكون عنده هذي المعلومات حاضرة دايمًا:
-
-| المعلومة | الأهمية |
-|---------|---------|
-| Network Diagram | عشان تعرف وين الـ Traffic يمشي |
-| Points of Visibility | وين عندك Taps و Span Ports و Full PCAP |
-| Data Flow Diagram | كيف الـ Traffic يوصل للإنترنت |
-| Log Flow Diagram | وين الـ Logs بتيجي وبتروح |
-| Incident Response Plan | إيش تعمل لما الكوارث تحدث |
-| Communication Plan | مين تتصل فيه ومتى |
-| Critical Assets List | قائمة أهم Assets في المؤسسة |
-| Disaster Recovery Plans | كيف ترجع للعمل بعد الحادثة |
-
-> [!WARNING]
-> من أكبر الأخطاء إن المحلل يبحث عن Logs ما يلاقيها ويستنتج إن الـ Attack ما صار — بدل ما يدرك إنه ما بيجمع هذا النوع من الـ Logs أصلًا.
-
----
-
-## Documents Analysts Must Know
-
-### هرم الوثائق
+الـ SOC بيشتغل في 5 خطوات أساسية:
 
 ```mermaid
 flowchart TD
-    A[Policies - What must be done] --> B[Standards - How and how much]
-    B --> C[Procedures - Step by step]
-    C --> D[Guidelines - Recommendations]
-    D --> E[Baselines - Specific settings]
-    E --> F[Playbooks / Use Cases - SOC specific]
+    A[1. Collection] --> B[2. Detection]
+    B --> C[3. Triage]
+    C --> D[4. Investigation / Analysis]
+    D --> E[5. Incident Response]
+    E --> F[Continuous Improvement]
+    F --> A
 ```
 
-### تفاصيل كل نوع
+### شرح كل خطوة
 
-| النوع | الإلزامية | المثال |
-|-------|---------|--------|
-| Policy | إلزامي | "جميع الأجهزة يجب أن يكون عليها Antivirus" |
-| Standard | إلزامي | "إعدادات الـ Antivirus يجب أن تكون..." |
-| Procedure | إلزامي | "خطوات تثبيت الـ Antivirus..." |
-| Guideline | اختياري | "أفضل الممارسات لنشر الـ Antivirus..." |
-| Baseline | مرجعي | CIS Benchmarks للأنظمة المختلفة |
-| Playbook | خاص بـ SOC | "كيف تتعامل مع Phishing Alert..." |
+**1. Collection (جمع البيانات)**
+جمع الـ Logs والـ Network Traffic والـ Endpoint Events من كل مكان في الشبكة.
+
+**2. Detection (الكشف)**
+مراقبة البيانات المجموعة واكتشاف الأنشطة المشبوهة باستخدام SIEM، IDS، Threat Intelligence، وقواعد التحليل.
+
+**3. Triage (الفرز والترتيب)**
+ترتيب الـ Alerts حسب الأولوية — مين اللي أخطر ويحتاج تتعامل معاه الأول؟
+
+**4. Investigation (التحقيق)**
+التعمق في الـ Alert عشان تحدد: هل ده True Positive؟ إيه اللي حصل؟ ما مدى الضرر؟
+
+**5. Incident Response (الرد على الحوادث)**
+Contain الهجوم، Eradicate التهديد، Recover الأنظمة، وتوثيق كل حاجة للتعلم منها.
 
 > [!TIP]
-> الـ Playbook هو وثيقتك كمحلل. هو اللي يحدد الخطوات الدقيقة لكل نوع حادثة. كلما كان أوضح وأشمل، كلما كان ردك على الحوادث أسرع وأدق.
+> معظم المحللين الجدد بيقضوا وقتهم في الـ Triage والـ Investigation. لكن المحللين المتميزين بيفهموا الـ Collection والـ Detection برضو — عشان يقدروا يحسّنوا العملية كلها.
+
+---
+
+## وظائف الـ SOC Core vs Specialty
+
+### Core SOC Functions (الوظائف الأساسية)
+
+| الوظيفة | الوصف |
+|---------|--------|
+| **Data Collection** | جمع بيانات الشبكة والـ Endpoints |
+| **Detection** | تحديد الأنشطة المشبوهة من البيانات المجموعة |
+| **Triage and Investigation** | فرز وتحقيق في الـ Alerts المكتشفة |
+| **Incident Response** | الرد على الحوادث وتقليل الأضرار |
+
+### Specialty Functions (الوظائف المتخصصة)
+
+| الوظيفة | الوصف |
+|---------|--------|
+| **Threat Intelligence** | جمع وتحليل معلومات عن المهاجمين وأساليبهم |
+| **Forensics** | تحليل جنائي دقيق بعد الحوادث |
+| **Self-Assessment** | Vulnerability Assessment وRed Teaming وConfiguration Monitoring |
+
+```mermaid
+flowchart LR
+    subgraph Core["Core SOC"]
+        A[Data Collection]
+        B[Detection]
+        C[Triage & Investigation]
+        D[Incident Response]
+    end
+    
+    subgraph Specialty["Specialty Support"]
+        E[Threat Intelligence]
+        F[Forensics]
+        G[Red Team / Pen Testing]
+    end
+    
+    E --> B
+    F --> D
+    G --> B
+```
+
+---
+
+## المعلومات الحيوية اللي لازم يكون عندك
+
+كل SOC لازم يكون عنده دايماً:
+
+| المستند / المعلومة | الهدف |
+|-------------------|-------|
+| **Network Diagram** | فهم شكل الشبكة ونقاط الرؤية |
+| **Points of Visibility** | تعرف فين ال Taps وSpan Ports والـ PCAP |
+| **Data Flow Diagram** | فهم إزاي الـ Traffic بيتحرك |
+| **Log Flow Diagram** | من فين الـ Logs بتيجي وفين بتروح |
+| **Incident Response Plan** | خطوات الرد على الحوادث الكبيرة |
+| **Communication Plan** | مين تتصل بيه وامتى |
+| **Critical Assets List** | أهم الأصول اللي لازم تحميها |
+| **Disaster Recovery Plan** | خطة الاستمرارية بعد الكوارث |
+
+> [!WARNING]
+> لو المحلل دور على Log ملقاهوش وقرر إن الهجوم ماحصلش — ده غلط! ممكن الـ Log موجود بس مش بتجمعه. لازم تعرف **أي** Logs بتجمع وأي مش بتجمع.
+
+---
+
+## أنواع الوثائق في الـ SOC
+
+```mermaid
+flowchart TD
+    A[Documentation Hierarchy] --> B[Policies]
+    A --> C[Standards]
+    A --> D[Procedures]
+    A --> E[Guidelines]
+    A --> F[Baselines]
+    A --> G[Playbooks / Use Cases]
+    
+    B --> B1[High-level, Mandatory - What to do]
+    C --> C1[Mandatory - How or how much]
+    D --> D1[Step-by-step instructions]
+    E --> E1[Suggested, not mandatory]
+    F --> F1[Specific settings lists - CIS Benchmarks]
+    G --> G1[SOC-specific detection rules and response steps]
+```
+
+### الفرق بين الوثائق
+
+| النوع | الإلزامية | مستوى التفصيل | مثال |
+|-------|----------|--------------|-------|
+| **Policy** | إلزامي | عالي المستوى | "كل الأجهزة لازم يكون عليها Antivirus" |
+| **Standard** | إلزامي | متوسط | "إعدادات الـ Antivirus لازم تكون كالآتي..." |
+| **Procedure** | إلزامي | تفصيلي جداً | "خطوات تنصيب الـ Antivirus: 1، 2، 3..." |
+| **Guideline** | اختياري | متوسط | "Best Practices لنشر الـ Antivirus" |
+| **Baseline** | مرجعي | تفصيلي جداً | CIS Benchmarks للـ Windows Server |
+| **Playbook / Use Case** | SOC-specific | تشغيلي | "خطوات الرد على Phishing Attack" |
 
 ---
 
 ## SOC Metrics
 
-### لماذا نقيس؟
-"That which gets measured, gets done" — اللي بيتقاس، بيتعمل.
+### إيه الـ Metrics الكويسة؟
 
-الـ Metrics هي الطريقة الوحيدة لتوصيل قيمة الـ SOC لصانعي القرار.
+الـ Metrics هي الطريقة اللي بيتحاسب عليها الـ SOC. لكن مش أي رقم Metric كويسة!
 
-### خصائص الـ Metric الجيد
+**معايير الـ Metric الكويسة:**
 
-```mermaid
-flowchart LR
-    A[Good Metric] --> B[Top-Down Derived]
-    A --> C[Actionable]
-    A --> D[Well-Defined and Repeatable]
-    A --> E[Frequently Updated]
-```
+| المعيار | السؤال |
+|---------|--------|
+| **Goal-Aligned** | بتساعد في تتبع هدف محدد؟ |
+| **Actionable** | في threshold إذا تخطيته بتعمل إيه؟ |
+| **Well-Defined** | لو اتنين حسبوها هيجوا بنفس الرقم؟ |
+| **Frequently Updated** | بتتحدث تلقائياً وبسرعة كافية للرد؟ |
 
-| الخاصية | السؤال |
-|--------|---------|
-| Top-Down Derived | أي هدف تحديدًا يساعد هذا الـ Metric في تتبعه؟ |
-| Actionable | إيش بتعمل لو الرقم كبر أو صغر؟ |
-| Well-Defined | لو اثنين يجمعوا نفس الـ Metric، هيطلعوا نفس الرقم؟ |
-| Frequently Updated | هل ممكن يتجمع أوتوماتيكيًا وبسرعة؟ |
+> [!WARNING]
+> اسأل نفسك: "لو الـ Metric اتحسنت، هل الـ Security اتحسنت فعلاً؟" لو الإجابة "مش ضروري" — يبقى الـ Metric غلط.
 
-### السؤال المهم دايمًا
-> "لو هذا الـ Metric تحسّن، هل الأمان فعلًا تحسّن؟"
+### أمثلة على Metrics مفيدة
 
-لو الإجابة "مش بالضرورة" → هذا Metric خاطئ.
-
-**أمثلة على Metrics مفيدة:**
-- متوسط وقت الاكتشاف (Mean Time to Detect - MTTD)
-- متوسط وقت الاستجابة (Mean Time to Respond - MTTR)
+- متوسط وقت الكشف عن الهجوم (Mean Time to Detect - MTTD)
+- متوسط وقت الرد (Mean Time to Respond - MTTR)  
 - عدد الـ True Positives مقارنة بالـ False Positives
-- عدد الحوادث المغلقة في الوقت المحدد
-
-> [!IMPORTANT]
-> لو بتُقاس بـ Metric لا تعتقد إنه مناسب، ناقش مديرك. الـ Metric الخاطئ ممكن يدفعك تعمل أشياء تحسّن الرقم لكن تضر الأمان الحقيقي.
+- حجم الـ Alert Queue بمرور الوقت
+- نسبة تغطية الـ MITRE ATT&CK techniques
 
 ---
 
-## Summary and Exam Checklist
+## summary
+### النقاط الأساسية
 
-### ملخص النقاط الرئيسية
+- الـ SOC بيقوم على **People + Process + Technology** — الثلاثة مع بعض
+- الأسئلة الأربعة (What to protect, Threats, Detection, Response) هي أساس تحديد Mission الـ SOC
+- الـ SOC Charter هو الوثيقة التأسيسية — محتاج موافقة الإدارة
+- الـ Steering Committee يضمن إن الـ SOC شايل وقته في الصح
+- الـ Risk Appetite بيتحدد حسب طبيعة المنظمة — الـ SOC لازم يشتغل جوّاه
+- الاختراق سيحصل — الهدف تقليل التأثير مش منع كل هجوم
+- الـ Tiered vs Tierless — مفيش الأصح، كل واحد ليه مزاياه
+- الخطوات: Collection → Detection → Triage → Investigation → IR → Improvement
+- الوثائق مش كلها زي بعض: Policy ≠ Standard ≠ Procedure ≠ Guideline
+- الـ Metrics لازم تكون Actionable ومرتبطة بأهداف حقيقية
 
-- **الـ SOC** يقوم على ثلاثة أعمدة: People و Process و Technology
-- **الـ People** هم الأهم — بدونهم لا شيء يعمل
-- **الأسئلة الأربعة** هي منطلق بناء أي SOC: ماذا نحمي، ما التهديدات، كيف نكتشف، كيف نستجيب
-- **الـ Charter** يعطي الفريق الشرعية للعمل ويوضح حدوده
-- **الـ Steering Committee** يضمن التوافق المستمر مع أهداف المؤسسة
-- **الـ Risk Appetite** يختلف من مؤسسة لأخرى ويتغير مع الوقت
-- **الاختراق سيحدث** — السؤال هو كيف نقلل تأثيره
-- **الـ Tiered vs Tierless** كلاهما صحيح — كل واحد محسّن لظروف مختلفة
-- **الوظائف الأساسية:** Collection → Detection → Triage → Investigation → Incident Response
-- **الـ Metrics** لازم تكون Actionable وTop-Down وRepeatable
-
-### Exam-Ready Checklist
-
-- [ ] أعرف الفرق بين People و Process و Technology وأهمية كل منها
-- [ ] أقدر أجاوب على الأسئلة الأربعة الأساسية لأي SOC
-- [ ] أفهم الغرض من الـ SOC Charter ومن يعتمده
-- [ ] أفهم ما هو الـ Steering Committee ودوره
-- [ ] أفهم مفهوم الـ Risk Appetite وأعطي أمثلة عليه
-- [ ] أعرف الـ Blue Team Truth #1: الاختراق سيحدث
-- [ ] أعرف الـ Blue Team Truth #2: الشركة لا تعيش فقط لتكون آمنة
-- [ ] أفهم الفرق بين الـ Tiered والـ Tierless SOC
-- [ ] أعرف الوظائف الأساسية للـ SOC (Core Functions)
-- [ ] أعرف الفرق بين Policy و Standard و Procedure و Guideline و Baseline و Playbook
-- [ ] أفهم ما هو الـ Metric الجيد وخصائصه الأربعة
-- [ ] أعرف المعلومات الحرجة التي يجب أن يمتلكها كل SOC
-
----
-
-*SANS SEC450 — Blue Team Fundamentals: Security Operations and Analysis*
-*Module 1: SOC Overview*
-*© Notes prepared for educational purposes based on SANS course material*
