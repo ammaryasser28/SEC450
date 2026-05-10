@@ -1,7 +1,6 @@
 
-> **الهدف من الـ Section ده:**
+> **الهدف من الـ Section ده:**  
 > هتفهم إيه هو الـ SOC (Security Operations Center) وإزاي بيشتغل، وإيه المكونات الأساسية اللي بتخليه يشتغل صح — من People وProcess وTechnology، وصولاً للـ Org Charts والـ Metrics.
-
 ---
 
 ## Table of Contents
