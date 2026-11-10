@@ -1,10 +1,12 @@
 # SANS SEC450 — Blue Team Fundamentals: Study Notes
 
-![Blue Team](https://img.shields.io/badge/Blue%20Team-informational) ![SOC](https://img.shields.io/badge/SOC-informational) ![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
+[![Read online](https://img.shields.io/badge/Read%20online-Blue%20Team%20Notes-2747c9?logo=bookstack&logoColor=white)](https://ammaryasser28.github.io/?t=sec450) ![Blue Team](https://img.shields.io/badge/Blue%20Team-informational) ![SOC](https://img.shields.io/badge/SOC-informational) ![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
 
 My personal study notes for **SANS SEC450: Blue Team Fundamentals — Security Operations and Analysis**, rewritten in my own words to make each topic easier to revise. The focus is on what a SOC analyst does day to day: understanding alerts, reading logs, analyzing network traffic, and investigating suspicious hosts and files.
 
-> 🌐 **Language:** explanations are written in Arabic (Egyptian dialect) with all technical terms and commands kept in English.
+📖 **Read it online:** every note in this repo is on [Blue Team Notes](https://ammaryasser28.github.io/?t=sec450), with interactive diagrams, search across all four courses, and progress tracking.
+
+> 🌐 **Language:** the notes are written in Arabic (Egyptian dialect), with every technical term and command kept in English. Each note also has a full English version: switch to **EN** at the top of [the site](https://ammaryasser28.github.io/?t=sec450&lang=en).
 
 > **Status:** in progress. Sections 450.1–450.3 are complete; 450.4 and 450.5 are being written.
 
@@ -54,7 +56,7 @@ My personal study notes for **SANS SEC450: Blue Team Fundamentals — Security O
 
 ---
 
-**Author:** Amr Yasser — SOC Analyst | Cybersecurity Mentor at Route Academy  
+**Author:** Bn Yasser — SOC Analyst  
 [LinkedIn](https://www.linkedin.com/in/bn-yasser-424bb4215/) · [GitHub](https://github.com/ammaryasser28)
 
 ⭐ If these notes help you, consider giving the repo a star.
